@@ -42,9 +42,16 @@ export class UserController {
     return res.status(200).json(data);
   }
 
+  async getUsersBysId(req: Request, res: Response) {
+    const { id } = req.params;
+    const data = await new UserService().getUserById(id);
+
+    return res.status(200).json(data);
+  }
+
   async profile(req: Request, res: Response) {
     const { id } = req.user;
-    const data = await new UserService().profile(id);
+    const data = await new UserService().getUserById(id);
 
     return res.status(200).json(data);
   }
