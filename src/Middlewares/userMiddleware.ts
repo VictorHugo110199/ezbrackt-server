@@ -50,4 +50,16 @@ export class UserMiddleware {
       next();
     });
   }
+
+  async verifyUser(req: Request, res: Response, next: NextFunction) {
+    const id = req.params.id;
+
+    const user = await userRepository.findOneBy({ id });
+
+    if (!user) {
+      throw new NotFoundError("Usuário não encontrado!");
+    }
+
+    next();
+  }
 }

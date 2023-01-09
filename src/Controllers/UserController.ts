@@ -26,6 +26,12 @@ export class UserController {
 
     const data = await new UserService().patch(payload, userId, paramsId);
 
-    return res.status(201).json(data);
+    return res.status(200).json(data);
+  }
+
+  async getUsers(req: Request, res: Response) {
+    const data = await new UserService().getUsers();
+
+    return res.status(200).json(data);
   }
 }

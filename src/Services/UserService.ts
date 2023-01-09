@@ -73,4 +73,10 @@ export class UserService {
     const { password: removedPassword, ...updatedUserReturn } = updatedUser;
     return updatedUserReturn;
   }
+
+  async getUsers() {
+    const users = await userRepository.createQueryBuilder("users").getMany();
+
+    return users;
+  }
 }

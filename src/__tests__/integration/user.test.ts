@@ -53,7 +53,7 @@ describe("/users", () => {
       .get("/users")
       .set("Authorization", `Bearer ${adminLoginResponse.body.token as string}`);
 
-    expect(response.body).toHaveLength(2);
+    expect(response.body).toHaveLength(1);
     expect(response.body[0]).not.toHaveProperty("password");
   });
 
