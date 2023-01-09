@@ -1,7 +1,7 @@
 import bcrypt, { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { ForbiddenError, UnauthorizedError } from "../Helpers/errors";
+import { UnauthorizedError } from "../Helpers/errors";
 import { ICreateUser, IUserLogin } from "../interfaces/userInterfaces/userInterface";
 import { userRepository } from "../Repositories/userRepository";
 
@@ -39,7 +39,7 @@ export class UserService {
     const passwordMatch = await compare(password, user?.password);
 
     if (!passwordMatch) {
-      throw new ForbiddenError("Usuário ou senha inválidos!");
+      throw new UnauthorizedError("Usuário ou senha inválidos!");
     }
 
     const token = jwt.sign({ id: user?.id }, process.env.SECRET_KEY as string, {
