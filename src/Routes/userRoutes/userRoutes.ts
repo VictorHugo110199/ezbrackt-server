@@ -5,4 +5,4 @@ import { UserMiddleware } from "../../Middlewares/userMiddleware";
 
 export const userRoutes = Router();
 
-userRoutes.post("/", new UserMiddleware().emailExist, new UserController().create);
+userRoutes.post("/", new UserMiddleware().emailExists, new UserController().create);
