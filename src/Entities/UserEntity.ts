@@ -1,11 +1,5 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  DeleteDateColumn
-} from "typeorm";
+import { Exclude } from "class-transformer";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
 @Entity("users")
 class User {
@@ -19,6 +13,7 @@ class User {
   email: string;
 
   @Column({ select: false })
+  @Exclude()
   password: string;
 
   @Column({ nullable: true })
@@ -26,9 +21,6 @@ class User {
 
   @Column({ default: true })
   isActive: boolean;
-
-  @DeleteDateColumn()
-  deletedAt: Date;
 
   @CreateDateColumn()
   createdAt: Date;

@@ -1,4 +1,5 @@
 import bcrypt, { compare } from "bcrypt";
+import { instanceToInstance } from "class-transformer";
 import jwt from "jsonwebtoken";
 
 import { UnauthorizedError, ConflictError, NotFoundError } from "../Helpers/errors";
@@ -21,9 +22,7 @@ export class UserService {
 
     await userRepository.save(newUser);
 
-    const { password: removePass, ...user } = newUser;
-
-    return user;
+    return instanceToInstance(newUser);
   }
 
   async login({ email, password }: IUserLogin) {
@@ -79,8 +78,8 @@ export class UserService {
     });
 
     await userRepository.save(updatedUser);
-    const { password: removedPassword, ...updatedUserReturn } = updatedUser;
-    return updatedUserReturn;
+
+    return instanceToInstance(updatedUser);
   }
 
   async getUsers() {

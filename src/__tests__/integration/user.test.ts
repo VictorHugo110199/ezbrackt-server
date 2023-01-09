@@ -30,11 +30,9 @@ describe("/users", () => {
     expect(response.body).toHaveProperty("isActive");
     expect(response.body).toHaveProperty("createdAt");
     expect(response.body).toHaveProperty("updatedAt");
-    expect(response.body).toHaveProperty("deletedAt");
     expect(response.body).not.toHaveProperty("password");
     expect(response.body.name).toEqual("Fred");
     expect(response.body.email).toEqual("Fred@mail.com");
-    expect(response.body.deletedAt).toEqual(null);
     expect(response.body.isActive).toEqual(true);
     expect(response.status).toBe(201);
   });
