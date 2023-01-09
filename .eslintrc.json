@@ -23,6 +23,7 @@
   },
   "plugins": ["@typescript-eslint", "eslint-plugin-import-helpers"],
   "rules": {
+    "no-prototype-builtins": "off",
     "import/no-named-as-default-member": 0,
     "camelcase": "off",
     "import/no-unresolved": "error",

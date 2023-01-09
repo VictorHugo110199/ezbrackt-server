@@ -105,7 +105,7 @@ describe("/users", () => {
     const response = await request(app)
       .delete(`/users/${UserTobeDeleted.body[0].id as string}`)
       .set("Authorization", `Bearer ${adminLoginResponse.body.token as string}`);
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(409);
     expect(response.body).toHaveProperty("message");
   });
 

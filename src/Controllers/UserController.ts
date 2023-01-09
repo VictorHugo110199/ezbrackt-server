@@ -23,8 +23,8 @@ export class UserController {
     const { id } = req.params;
     const status = await new UserService().delete(id);
 
-    return res.status(status);
-   }
+    return res.sendStatus(status);
+  }
 
   async patch(req: Request, res: Response) {
     const payload: IUserUpdate = req.body;
