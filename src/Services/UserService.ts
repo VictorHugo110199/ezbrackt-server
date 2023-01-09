@@ -1,7 +1,7 @@
 import bcrypt, { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { UnauthorizedError } from "../Helpers/errors";
+import { UnauthorizedError, ConflictError } from "../Helpers/errors";
 import { ICreateUser, IUserLogin } from "../interfaces/userInterfaces/userInterface";
 import { userRepository } from "../Repositories/userRepository";
 
@@ -48,5 +48,17 @@ export class UserService {
     });
 
     return { token };
+  }
+
+  async delete(id: string): Promise<number> {
+    const user = await userRepository.findOneBy({ id });
+
+    if (!user?.isActive) {
+      throw new ConflictError("Usuário não está ativo!");
+    }
+
+    await userRepository.update(id, { isActive: false });
+
+    return 204;
   }
 }

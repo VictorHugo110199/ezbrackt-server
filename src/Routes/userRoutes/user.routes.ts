@@ -12,4 +12,4 @@ userRoutes.post("/", userMiddleware.emailExists, userController.create);
 userRoutes.get("");
 userRoutes.get("/:id");
 userRoutes.patch("/:id");
-userRoutes.delete("/:id");
+userRoutes.delete("/:id", userController.delete);
