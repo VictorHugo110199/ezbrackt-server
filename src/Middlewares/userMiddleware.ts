@@ -4,6 +4,7 @@ import "dotenv/config";
 
 import { ConflictError, NotFoundError, UnauthorizedError } from "../Helpers/errors";
 import { userRepository } from "../Repositories/userRepository";
+
 export class UserMiddleware {
   async emailExists(req: Request, res: Response, next: NextFunction) {
     const userEmail = req.body.email;
