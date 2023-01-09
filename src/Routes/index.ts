@@ -1,9 +1,12 @@
 import { Router } from "express";
 
-import { sessionRoutes } from "./sessionRoutes/sessionRoutes";
-import { userRoutes } from "./userRoutes/userRoutes";
+import { UserController } from "../Controllers/UserController";
+import { UserMiddleware } from "../Middlewares/userMiddleware";
+import { userRoutes } from "./userRoutes/user.routes";
+
+const userMiddleware = new UserMiddleware();
 
 export const routes = Router();
 
 routes.use("/users", userRoutes);
-routes.use("/login", sessionRoutes);
+routes.use("/login", userMiddleware.isActive, new UserController().login);

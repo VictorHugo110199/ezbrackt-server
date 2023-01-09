@@ -8,7 +8,7 @@ export class UserMiddleware {
     const userExists = await userRepository.findOneBy({ email: userEmail });
 
     if (userExists != null) {
-      throw new ConflictError("E-mail already exists");
+      throw new ConflictError("E-mail já cadastrado!");
     }
 
     next();
@@ -19,7 +19,9 @@ export class UserMiddleware {
     const user = await userRepository.findOneBy({ id });
 
     if (user == null) {
-      throw new NotFoundError("User not found");
+      throw new NotFoundError("Usuário não encontrado!");
     }
+
+    next();
   }
 }
