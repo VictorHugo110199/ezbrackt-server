@@ -11,5 +11,17 @@ export const userRoutes = Router();
 userRoutes.post("/", userMiddleware.emailExists, userController.create);
 userRoutes.get("/", userMiddleware.tokenExists, userController.getUsers);
 userRoutes.get("/:id", userMiddleware.tokenExists, userController.getUsersBysId);
-userRoutes.patch("/:id", userMiddleware.tokenExists, userMiddleware.verifyUser, userController.patch);
-userRoutes.delete("/:id", userMiddleware.tokenExists, userMiddleware.verifyUser, userController.delete);
+userRoutes.patch(
+  "/:id",
+  userMiddleware.tokenExists,
+  userMiddleware.verifyUser,
+  userMiddleware.verifyUserLogged,
+  userController.patch
+);
+userRoutes.delete(
+  "/:id",
+  userMiddleware.tokenExists,
+  userMiddleware.verifyUser,
+  userMiddleware.verifyUserLogged,
+  userController.delete
+);

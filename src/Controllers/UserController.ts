@@ -6,7 +6,6 @@ import { UserService } from "../Services/UserService";
 export class UserController {
   async create(req: Request, res: Response) {
     const payload: ICreateUser = req.body;
-
     const user = await new UserService().create(payload);
 
     return res.status(201).json(user);
@@ -29,9 +28,8 @@ export class UserController {
   async patch(req: Request, res: Response) {
     const payload: IUserUpdate = req.body;
     const userId: string = req.user.id;
-    const paramsId: string = req.params.id;
 
-    const data = await new UserService().patch(payload, userId, paramsId);
+    const data = await new UserService().patch(payload, userId);
 
     return res.status(200).json(data);
   }

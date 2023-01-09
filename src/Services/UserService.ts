@@ -7,7 +7,7 @@ import { ICreateUser, IUser, IUserLogin, IUserUpdate } from "../interfaces/userI
 import { userRepository } from "../Repositories/userRepository";
 
 export class UserService {
-  async create(payload: ICreateUser) {
+  async create(payload: ICreateUser): Promise<IUser> {
     const { email, isActive, name, password, photo } = payload;
 
     const hashPassword = await bcrypt.hash(password, 10);
@@ -21,7 +21,6 @@ export class UserService {
     });
 
     await userRepository.save(newUser);
-
     return instanceToInstance(newUser);
   }
 
@@ -57,16 +56,11 @@ export class UserService {
     }
 
     await userRepository.update(id, { isActive: false });
-
     return 204;
   }
 
-  async patch(payload: IUserUpdate, userId: string, paramsId: string): Promise<IUser> {
+  async patch(payload: IUserUpdate, userId: string): Promise<IUser> {
     const user = await userRepository.findOneBy({ id: userId });
-
-    if (userId !== paramsId) {
-      throw new UnauthorizedError("Não é possível alterar outro usuário.");
-    }
 
     if (payload.hasOwnProperty("isActive") || payload.hasOwnProperty("id")) {
       throw new UnauthorizedError("Não é possível atualizar os campos: isActive e id");
@@ -78,7 +72,6 @@ export class UserService {
     });
 
     await userRepository.save(updatedUser);
-
     return instanceToInstance(updatedUser);
   }
 

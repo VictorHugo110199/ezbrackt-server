@@ -63,4 +63,15 @@ export class UserMiddleware {
 
     next();
   }
+
+  verifyUserLogged(req: Request, res: Response, next: NextFunction) {
+    const userId: string = req.user.id;
+    const paramsId: string = req.params.id;
+
+    if (userId !== paramsId) {
+      throw new UnauthorizedError("Não é possível alterar outro usuário.");
+    }
+
+    next();
+  }
 }
