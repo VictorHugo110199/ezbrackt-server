@@ -8,12 +8,6 @@ export class UserService {
   async create(payload: createUserInterface) {
     const { email, isActive, name, password, photo } = payload;
 
-    const userExists = await userRepository.findOneBy({ email });
-
-    if (userExists != null) {
-      throw new ConflictError("E-mail already exists");
-    }
-
     const hashPassword = await bcrypt.hash(password, 10);
 
     const newUser = userRepository.create({
