@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { ICreateUser, IUserLogin } from "../interfaces/userInterfaces/userInterface";
+import { ICreateUser, IUserLogin, IUserUpdate } from "../interfaces/userInterfaces/userInterface";
 import { UserService } from "../Services/UserService";
 
 export class UserController {
@@ -17,5 +17,15 @@ export class UserController {
     const data = await new UserService().login(payload);
 
     return res.status(200).json(data);
+  }
+
+  async patch(req: Request, res: Response) {
+    const payload: IUserUpdate = req.body;
+    const userId: string = req.user.id;
+    const paramsId: string = req.params.id;
+
+    const data = await new UserService().patch(payload, userId, paramsId);
+
+    return res.status(201).json(data);
   }
 }
