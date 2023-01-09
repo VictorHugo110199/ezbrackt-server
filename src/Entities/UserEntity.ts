@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn
+} from "typeorm";
 
 @Entity("users")
 class User {
@@ -16,6 +23,18 @@ class User {
 
   @Column({ nullable: true })
   photo: string;
+
+  @Column({ default: true })
+  isActive: boolean;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
 
 export default User;
