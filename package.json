@@ -11,13 +11,13 @@
     }
   },
   "lint-staged": {
-    "src/**/*.ts": [
+    "./src/**/*.ts": [
       "yarn lint --fix"
     ]
   },
   "scripts": {
     "dev": "tsnd --ignore-watch node_modules src/server.ts",
-    "lint": "eslint src/**/*.ts --max-warnings=0",
+    "lint": "eslint ./src/**/*.ts",
     "build": "tsc",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/default",
     "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
