@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import { ConflictError } from "../Helpers/errors";
+import { ConflictError, NotFoundError } from "../Helpers/errors";
 import { userRepository } from "../Repositories/userRepository";
 export class UserMiddleware {
   async emailExist(req: Request, res: Response, next: NextFunction) {
@@ -10,6 +10,15 @@ export class UserMiddleware {
     if (userExists != null) {
       throw new ConflictError("E-mail already exists");
     }
-    next();
-  }
+    
+     next(); 
+    }
+
+  async isActive(req: Request, res: Response, next: NextFunction) {
+    const { id } = req.params;
+    const user = await userRepository.findOneBy({ id });
+
+    if (user == null) {
+      throw new NotFoundError("User not found");
+    }
 }
