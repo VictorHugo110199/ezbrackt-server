@@ -23,7 +23,7 @@
     "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
     "typeorm": "typeorm-ts-node-commonjs",
     "prepare": "husky install",
-    "test": "NODE_ENV=test jest --verbose"
+    "test": "cross-env NODE_ENV=test jest --verbose"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

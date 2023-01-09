@@ -1,6 +1,6 @@
+import "dotenv/config";
 import path from "path";
 import { DataSource } from "typeorm";
-import "dotenv/config";
 
 const AppDataSource =
   process.env.NODE_ENV === "test"

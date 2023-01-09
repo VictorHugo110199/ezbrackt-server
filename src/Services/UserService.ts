@@ -1,8 +1,9 @@
 import bcrypt, { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
 
+
 import { UnauthorizedError, ConflictError } from "../Helpers/errors";
-import { ICreateUser, IUserLogin } from "../interfaces/userInterfaces/userInterface";
+import { ICreateUser, IUser, IUserLogin, IUserUpdate } from "../interfaces/userInterfaces/userInterface";
 import { userRepository } from "../Repositories/userRepository";
 
 export class UserService {
@@ -50,6 +51,7 @@ export class UserService {
     return { token };
   }
 
+
   async delete(id: string): Promise<number> {
     const user = await userRepository.findOneBy({ id });
 
@@ -60,5 +62,35 @@ export class UserService {
     await userRepository.update(id, { isActive: false });
 
     return 204;
+}
+
+  async patch(payload: IUserUpdate, userId: string, paramsId: string): Promise<IUser> {
+    const user = await userRepository.findOneBy({ id: userId });
+    const keys = Object.keys(payload);
+
+    if (userId !== paramsId) {
+      throw new UnauthorizedError("Não é possível alterar outro usuário.");
+    }
+
+    if (keys.includes("isActive")) {
+      throw new UnauthorizedError("Não é possível atualizar o campo isActive.");
+    }
+    if (keys.includes("id")) {
+      throw new UnauthorizedError("Não é possível atualizar o Id");
+    }
+
+    const updatedUser = userRepository.create({
+      ...user,
+      ...payload
+    });
+    await userRepository.save(updatedUser);
+    const { password: removedPassword, ...updatedUserReturn } = updatedUser;
+    return updatedUserReturn;
+  }
+
+  async getUsers() {
+    const users = await userRepository.createQueryBuilder("users").getMany();
+
+    return users;
   }
 }

@@ -9,7 +9,7 @@ const userController = new UserController();
 export const userRoutes = Router();
 
 userRoutes.post("/", userMiddleware.emailExists, userController.create);
-userRoutes.get("");
+userRoutes.get("/", userMiddleware.tokenExists, userController.getUsers);
 userRoutes.get("/:id");
-userRoutes.patch("/:id");
-userRoutes.delete("/:id", userController.delete);
+userRoutes.patch("/:id", userMiddleware.tokenExists, userMiddleware.verifyUser, userController.patch);
+userRoutes.delete("/:id", userMiddleware.tokenExists, userMiddleware.verifyUser, userController.delete);
