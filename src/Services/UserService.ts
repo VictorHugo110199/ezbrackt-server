@@ -1,7 +1,7 @@
 import bcrypt, { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { UnauthorizedError, ConflictError } from "../Helpers/errors";
+import { UnauthorizedError, ConflictError, NotFoundError } from "../Helpers/errors";
 import { ICreateUser, IUser, IUserLogin, IUserUpdate } from "../interfaces/userInterfaces/userInterface";
 import { userRepository } from "../Repositories/userRepository";
 
@@ -86,5 +86,13 @@ export class UserService {
   async getUsers() {
     const users = await userRepository.createQueryBuilder("users").getMany();
     return users;
+  }
+
+  async profile(id: string): Promise<IUser> {
+    const user = await userRepository.findOneBy({ id });
+    if (!user) {
+      throw new NotFoundError("Usuário inexistente.");
+    }
+    return user;
   }
 }
