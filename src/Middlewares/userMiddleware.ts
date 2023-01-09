@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import "dotenv/config";
 
-import { ConflictError, NotFoundError } from "../Helpers/errors";
+import { ConflictError, NotFoundError, UnauthorizedError } from "../Helpers/errors";
 import { userRepository } from "../Repositories/userRepository";
 export class UserMiddleware {
   async emailExists(req: Request, res: Response, next: NextFunction) {
@@ -23,5 +25,29 @@ export class UserMiddleware {
     }
 
     next();
+  }
+
+  tokenExists(req: Request, res: Response, next: NextFunction) {
+    let token = req.headers.authorization;
+
+    if (!token) {
+      throw new UnauthorizedError("Token inválido");
+    }
+
+    token = token.split(" ")[1];
+
+    jwt.verify(token, process.env.SECRET_KEY as string, (error, decoded: any) => {
+      if (error) {
+        throw new UnauthorizedError("Token inválido");
+      }
+
+      req.user = {
+        id: decoded.id,
+        email: decoded.email,
+        isActive: decoded.isActive
+      };
+
+      next();
+    });
   }
 }
