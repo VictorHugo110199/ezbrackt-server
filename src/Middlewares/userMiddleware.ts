@@ -53,7 +53,7 @@ export class UserMiddleware {
   }
 
   async verifyUser(req: Request, res: Response, next: NextFunction) {
-    const id = req.params.id;
+    const { id } = req.params;
 
     const user = await userRepository.findOneBy({ id });
 

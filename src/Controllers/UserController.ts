@@ -41,4 +41,11 @@ export class UserController {
 
     return res.status(200).json(data);
   }
+
+  async profile(req: Request, res: Response) {
+    const { id } = req.user;
+    const data = await new UserService().profile(id);
+
+    return res.status(200).json(data);
+  }
 }

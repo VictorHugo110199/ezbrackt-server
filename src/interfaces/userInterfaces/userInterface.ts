@@ -3,7 +3,7 @@ export interface IUser {
   email: string;
   isActive?: boolean;
   photo?: string;
-  deletedAt: Date;
+  deletedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
