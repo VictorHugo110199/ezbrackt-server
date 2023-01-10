@@ -27,4 +27,12 @@ export class CompetitionController {
 
     return res.json(competitions);
   }
+
+  async delete(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const status = await new CompetitionService().delete(id);
+
+    return res.sendStatus(status);
+  }
 }

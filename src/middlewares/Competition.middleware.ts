@@ -6,6 +6,7 @@ import { competitionRepository } from "../repositories/competition.repository";
 export class CompetitionMiddleware {
   async idExists(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { id } = req.params;
+
     const competition = await competitionRepository.findOneBy({ id });
 
     if (!competition) {

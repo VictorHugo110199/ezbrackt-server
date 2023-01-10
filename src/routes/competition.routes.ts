@@ -19,3 +19,11 @@ competitionRoutes.patch(
   competitionMiddleware.idValid,
   competitionController.patch
 );
+
+competitionRoutes.delete(
+  "/:id",
+  userMiddleware.tokenExists,
+  competitionMiddleware.idExists,
+  competitionMiddleware.idValid,
+  competitionController.delete
+);
