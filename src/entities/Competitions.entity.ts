@@ -4,7 +4,8 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany
+  OneToMany,
+  ManyToOne
 } from "typeorm";
 
 import BracketCompetition from "./BracketCompetition.entity";
@@ -16,7 +17,7 @@ class Competitions {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @OneToMany(() => User, (user) => user.id)
+  @ManyToOne(() => User, (user) => user.id)
   createUser: User;
 
   @Column({ length: 30, nullable: false, unique: true })
