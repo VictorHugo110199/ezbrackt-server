@@ -1,6 +1,5 @@
 export interface IPlayer {
   name: string;
-  createdAt: Date;
   photo?: string;
   competitions: string;
 }
