@@ -10,7 +10,7 @@ export class Player {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   photo: string;
 
   @ManyToOne(() => Competitions, (competition) => competition.players)
