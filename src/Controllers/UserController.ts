@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 
+import { BadRequestError, ForbiddenError } from "../Helpers/errors";
 import { ICreateUser, IUserLogin, IUserUpdate } from "../interfaces/userInterfaces/userInterface";
+import { userRepository } from "../Repositories/userRepository";
 import { UserService } from "../Services/UserService";
 
 export class UserController {

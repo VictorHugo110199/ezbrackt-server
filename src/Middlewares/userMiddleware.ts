@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-import { ConflictError, NotFoundError, UnauthorizedError } from "../Helpers/errors";
+import { BadRequestError, ConflictError, NotFoundError, UnauthorizedError } from "../Helpers/errors";
 import { userRepository } from "../Repositories/userRepository";
 export class UserMiddleware {
   async emailExists(req: Request, res: Response, next: NextFunction) {
