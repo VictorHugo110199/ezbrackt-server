@@ -32,6 +32,11 @@ competitionRoutes.delete(
   competitionController.delete
 );
 
+
+competitionRoutes.post("/:id/players", userMiddleware.tokenExists, playerController.create);
+
+competitionRoutes.patch("/:id/players", userMiddleware.tokenExists, playerController.patch);
+
 competitionRoutes.post("/:id/players", playerController.create);
 competitionRoutes.get(
   "/:id/players",
@@ -39,3 +44,4 @@ competitionRoutes.get(
   competitionMiddleware.idExists,
   playerController.get
 );
+
