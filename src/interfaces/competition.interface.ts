@@ -19,3 +19,8 @@ export interface ICreateCompetition {
   number_players: number;
   description?: string;
 }
+
+export interface IUpdateCompetition {
+  name?: string;
+  description?: string;
+}
