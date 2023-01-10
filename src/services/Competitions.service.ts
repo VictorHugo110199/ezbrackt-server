@@ -44,7 +44,7 @@ export class CompetitionService {
       }
     });
 
-    return competitions;
+    return competitions[0];
   }
 
   async getCompetitions() {

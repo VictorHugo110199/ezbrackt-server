@@ -22,7 +22,7 @@ export class CompetitionController {
     return res.status(200).json(competitionUpdated);
   }
 
-  async getCompetition(req: Request, res: Response) {
+  async getCompetitions(req: Request, res: Response) {
     const competitions = await new CompetitionService().getCompetitions();
 
     return res.json(competitions);
