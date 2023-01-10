@@ -44,7 +44,7 @@ class Competitions {
   @OneToMany(() => Players, (players) => players.id)
   players: Players[];
 
-  @OneToMany(() => BracketCompetition, (bracketCompetition) => bracketCompetition.competition)
+  @OneToMany(() => BracketCompetition, (bracket) => bracket.competition)
   brackets: BracketCompetition[];
 }
 

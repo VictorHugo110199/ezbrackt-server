@@ -10,6 +10,9 @@ class Players {
   @Column({ length: 30, nullable: false })
   name: string;
 
+  @Column({ nullable: true })
+  photo: string;
+
   @CreateDateColumn()
   createdAt: Date;
 
