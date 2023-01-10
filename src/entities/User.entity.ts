@@ -1,5 +1,15 @@
 import { Exclude } from "class-transformer";
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  OneToMany
+} from "typeorm";
+
+import Competitions from "./Competitions.entity";
 
 @Entity("users")
 class User {
@@ -27,6 +37,9 @@ class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => Competitions, (competitions) => competitions.id)
+  competitions: Competitions[];
 }
 
 export default User;
