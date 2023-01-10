@@ -11,11 +11,13 @@ const competitionMiddleware = new CompetitionMiddleware();
 export const competitionRoutes = Router();
 
 competitionRoutes.post("/", userMiddleware.tokenExists, competitionController.create);
+
 competitionRoutes.get("/", competitionController.getCompetition);
+
 competitionRoutes.patch(
   "/:id",
   userMiddleware.tokenExists,
   competitionMiddleware.idExists,
   competitionMiddleware.idValid,
-  competitionController.patch
+  competitionController.update
 );

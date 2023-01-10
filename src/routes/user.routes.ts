@@ -19,7 +19,7 @@ userRoutes.patch(
   userMiddleware.tokenExists,
   userMiddleware.verifyUser,
   userMiddleware.verifyUserLogged,
-  userController.patch
+  userController.update
 );
 
 userRoutes.delete(

@@ -21,7 +21,7 @@ export class CompetitionService {
     return newCompetition;
   }
 
-  async patch(payload: IUpdateCompetition, campId: string) {
+  async update(payload: IUpdateCompetition, campId: string) {
     const competition = await competitionRepository.findOneBy({ id: campId });
 
     if (payload.hasOwnProperty("number_players") || payload.hasOwnProperty("isActive")) {

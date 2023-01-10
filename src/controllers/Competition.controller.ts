@@ -13,11 +13,11 @@ export class CompetitionController {
     return res.status(201).json(competition);
   }
 
-  async patch(req: Request, res: Response) {
+  async update(req: Request, res: Response) {
     const payload: IUpdateCompetition = req.body;
     const { id } = req.params;
 
-    const competitionUpdated = await new CompetitionService().patch(payload, id);
+    const competitionUpdated = await new CompetitionService().update(payload, id);
 
     return res.status(200).json(competitionUpdated);
   }

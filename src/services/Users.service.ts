@@ -58,7 +58,7 @@ export class UserService {
     return 204;
   }
 
-  async patch(payload: IUserUpdate, id: string): Promise<IUser> {
+  async update(payload: IUserUpdate, id: string): Promise<IUser> {
     const user = await userRepository.findOneBy({ id });
 
     if (payload.hasOwnProperty("isActive") || payload.hasOwnProperty("id")) {

@@ -25,10 +25,10 @@ export class UserController {
     return res.sendStatus(status);
   }
 
-  async patch(req: Request, res: Response) {
+  async update(req: Request, res: Response) {
     const payload: IUserUpdate = req.body;
     const { id } = req.user;
-    const data = await new UserService().patch(payload, id);
+    const data = await new UserService().update(payload, id);
 
     return res.status(200).json(data);
   }
