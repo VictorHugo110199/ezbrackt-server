@@ -4,13 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
   ManyToOne,
   JoinColumn
 } from "typeorm";
 
-import BracketCompetition from "./BracketCompetition.entity";
-import Players from "./Players.entity";
 import User from "./User.entity";
 
 @Entity("competitions")
@@ -42,13 +39,6 @@ class Competitions {
 
   @UpdateDateColumn()
   updatedAt: Date;
-
-  @OneToMany(() => Players, (players) => players.id)
-  @JoinColumn()
-  players: Players[];
-
-  @OneToMany(() => BracketCompetition, (bracket) => bracket.competition)
-  brackets: BracketCompetition[];
 
   @Column({ default: true })
   isActive: boolean;
