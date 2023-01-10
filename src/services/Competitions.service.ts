@@ -17,4 +17,14 @@ export class CompetitionService {
     await competitionRepository.save(newCompetition);
     return newCompetition;
   }
+
+  async getCompetitions() {
+    const competitions = await competitionRepository.find({
+      where: {
+        isActive: true
+      }
+    });
+
+    return competitions;
+  }
 }
