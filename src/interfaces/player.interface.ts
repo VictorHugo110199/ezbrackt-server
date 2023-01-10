@@ -1,7 +1,7 @@
 export interface IPlayer {
   name: string;
   photo?: string;
-  competitions: string;
+  competition: string;
 }
 
 export interface ICreatePlayer {
