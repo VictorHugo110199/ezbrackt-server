@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-import { ConflictError, NotFoundError, UnauthorizedError } from "../helpers/Errors.helper";
+import { BadRequestError, ConflictError, NotFoundError, UnauthorizedError } from "../helpers/Errors.helper";
 import { userRepository } from "../repositories/user.repository";
 
 export class UserMiddleware {
@@ -18,11 +18,12 @@ export class UserMiddleware {
   }
 
   async isActive(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const { id } = req.params;
-    const user = await userRepository.findOneBy({ id });
+    const { email } = req.body;
 
-    if (!user) {
-      throw new NotFoundError("Usuário não encontrado!");
+    const user = await userRepository.findOneBy({ email });
+
+    if (user?.isActive === false) {
+      throw new BadRequestError("Usuário inativo!");
     }
 
     next();

@@ -33,7 +33,7 @@ describe("/login", () => {
 
   it("POST /login -  should not be able to login with the user with incorrect password or email", async () => {
     const response = await request(app).post("/login").send({
-      email: "felipe@mail.com",
+      email: "matheus@mail.com",
       password: "1234567"
     });
 
@@ -41,16 +41,19 @@ describe("/login", () => {
     expect(response.status).toBe(401);
   });
 
-  // it("POST /login -  should not be able to login with the user with isActive = false", async () => {
-  //   const adminLoginResponse = await request(app).post("/login").send(mockedLogin);
-  //   const findUser = await request(app)
-  //     .get("/users")
-  //     .set("Authorization", `Bearer ${adminLoginResponse.body.token as string}`);
-  //   await request(app)
-  //     .delete(`/users/${findUser.body[0].id as string}`)
-  //     .set("Authorization", `Bearer ${adminLoginResponse.body.token as string}`);
-  //   const response = await request(app).post("/login").send(mockedLogin);
-  //   expect(response.body).toHaveProperty("message");
-  //   expect(response.status).toBe(400);
-  // });
+  it("POST /login -  should not be able to login with the user with isActive = false", async () => {
+    const loginResponse = await request(app).post("/login").send(mockedLogin);
+
+    const findUser = await request(app)
+      .get("/users")
+      .set("Authorization", `Bearer ${loginResponse.body.token as string}`);
+
+    await request(app)
+      .delete(`/users/${findUser.body[0].id as string}`)
+      .set("Authorization", `Bearer ${loginResponse.body.token as string}`);
+
+    const response = await request(app).post("/login").send(mockedLogin);
+    expect(response.body).toHaveProperty("message");
+    expect(response.status).toBe(400);
+  });
 });

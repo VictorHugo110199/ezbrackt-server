@@ -81,9 +81,11 @@ export class UserService {
 
   async getUserById(id: string): Promise<IUser> {
     const user = await userRepository.findOneBy({ id });
+
     if (!user) {
       throw new NotFoundError("Usuário inexistente.");
     }
+
     return user;
   }
 }

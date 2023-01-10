@@ -1,11 +1,11 @@
 export const mockedUser = {
   name: "Fred",
-  email: "Fred@mail.com",
+  email: "fred@mail.com",
   password: "fred@1234",
-  photo: "pbdesunga.com"
+  photo: "urlphoto.com"
 };
 
 export const mockedLogin = {
-  email: "Fred@mail.com",
+  email: "fred@mail.com",
   password: "fred@1234"
 };
