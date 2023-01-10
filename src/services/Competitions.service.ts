@@ -53,7 +53,8 @@ export class CompetitionService {
         isActive: true
       },
       relations: {
-        user: true
+        user: true,
+        players: true
       }
     });
 
