@@ -2,33 +2,33 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-import { ConflictError, NotFoundError, UnauthorizedError } from "../Helpers/errors";
-import { userRepository } from "../Repositories/userRepository";
+import { ConflictError, NotFoundError, UnauthorizedError } from "../helpers/Errors.helper";
+import { userRepository } from "../repositories/user.repository";
 
 export class UserMiddleware {
-  async emailExists(req: Request, res: Response, next: NextFunction) {
-    const userEmail = req.body.email;
-    const userExists = await userRepository.findOneBy({ email: userEmail });
+  async emailExists(req: Request, res: Response, next: NextFunction): Promise<void> {
+    const { email } = req.body;
+    const userExists = await userRepository.findOneBy({ email });
 
-    if (userExists != null) {
+    if (userExists) {
       throw new ConflictError("E-mail já cadastrado!");
     }
 
     next();
   }
 
-  async isActive(req: Request, res: Response, next: NextFunction) {
+  async isActive(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { id } = req.params;
     const user = await userRepository.findOneBy({ id });
 
-    if (user == null) {
+    if (!user) {
       throw new NotFoundError("Usuário não encontrado!");
     }
 
     next();
   }
 
-  tokenExists(req: Request, res: Response, next: NextFunction) {
+  tokenExists(req: Request, res: Response, next: NextFunction): void {
     let token = req.headers.authorization;
 
     if (!token) {
@@ -52,7 +52,7 @@ export class UserMiddleware {
     });
   }
 
-  async verifyUser(req: Request, res: Response, next: NextFunction) {
+  async verifyUser(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { id } = req.params;
 
     const user = await userRepository.findOneBy({ id });
@@ -64,7 +64,7 @@ export class UserMiddleware {
     next();
   }
 
-  verifyUserLogged(req: Request, res: Response, next: NextFunction) {
+  verifyUserLogged(req: Request, res: Response, next: NextFunction): void {
     const userId: string = req.user.id;
     const paramsId: string = req.params.id;
 

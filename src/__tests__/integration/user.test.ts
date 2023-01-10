@@ -136,9 +136,6 @@ describe("/users", () => {
     const admingLoginResponse = await request(app).post("/login").send(mockedLogin);
     const token = `Bearer ${admingLoginResponse.body.token as string}`;
 
-    const userTobeUpdateRequest = await request(app).get("/users").set("Authorization", token);
-    const userTobeUpdateId = userTobeUpdateRequest.body[0].id;
-
     const response = await request(app)
       .patch(`/users/13970660-5dbe-423a-9a9d-5c23b37943cf`)
       .set("Authorization", token)

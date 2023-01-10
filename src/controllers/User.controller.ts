@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
-import { ICreateUser, IUserLogin, IUserUpdate } from "../interfaces/userInterfaces/userInterface";
-import { UserService } from "../Services/UserService";
+import { ICreateUser, IUserLogin, IUserUpdate } from "../interfaces/user.interface";
+import { UserService } from "../services/Users.service";
 
 export class UserController {
   async create(req: Request, res: Response) {
@@ -15,7 +15,7 @@ export class UserController {
     const payload: IUserLogin = req.body;
     const data = await new UserService().login(payload);
 
-    return res.status(200).json(data);
+    return res.status(200).json({ token: data });
   }
 
   async delete(req: Request, res: Response) {
@@ -27,9 +27,8 @@ export class UserController {
 
   async patch(req: Request, res: Response) {
     const payload: IUserUpdate = req.body;
-    const userId: string = req.user.id;
-
-    const data = await new UserService().patch(payload, userId);
+    const { id } = req.user;
+    const data = await new UserService().patch(payload, id);
 
     return res.status(200).json(data);
   }

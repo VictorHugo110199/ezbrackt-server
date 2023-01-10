@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import { UserController } from "../../Controllers/UserController";
-import { UserMiddleware } from "../../Middlewares/userMiddleware";
+import { UserController } from "../controllers/User.controller";
+import { UserMiddleware } from "../middlewares/User.middleware";
 
 const userMiddleware = new UserMiddleware();
 const userController = new UserController();
@@ -9,8 +9,11 @@ const userController = new UserController();
 export const userRoutes = Router();
 
 userRoutes.post("/", userMiddleware.emailExists, userController.create);
+
 userRoutes.get("/", userMiddleware.tokenExists, userController.getUsers);
+
 userRoutes.get("/:id", userMiddleware.tokenExists, userController.getUsersBysId);
+
 userRoutes.patch(
   "/:id",
   userMiddleware.tokenExists,
@@ -18,6 +21,7 @@ userRoutes.patch(
   userMiddleware.verifyUserLogged,
   userController.patch
 );
+
 userRoutes.delete(
   "/:id",
   userMiddleware.tokenExists,

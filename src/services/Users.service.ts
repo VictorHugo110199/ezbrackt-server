@@ -2,14 +2,13 @@ import bcrypt, { compare } from "bcrypt";
 import { instanceToInstance } from "class-transformer";
 import jwt from "jsonwebtoken";
 
-import { UnauthorizedError, ConflictError, NotFoundError } from "../Helpers/errors";
-import { ICreateUser, IUser, IUserLogin, IUserUpdate } from "../interfaces/userInterfaces/userInterface";
-import { userRepository } from "../Repositories/userRepository";
+import { UnauthorizedError, ConflictError, NotFoundError } from "../helpers/Errors.helper";
+import { ICreateUser, IUser, IUserLogin, IUserUpdate } from "../interfaces/user.interface";
+import { userRepository } from "../repositories/user.repository";
 
 export class UserService {
   async create(payload: ICreateUser): Promise<IUser> {
     const { email, isActive, name, password, photo } = payload;
-
     const hashPassword = await bcrypt.hash(password, 10);
 
     const newUser = userRepository.create({
@@ -24,7 +23,7 @@ export class UserService {
     return instanceToInstance(newUser);
   }
 
-  async login({ email, password }: IUserLogin) {
+  async login({ email, password }: IUserLogin): Promise<string> {
     const user = await userRepository.findOne({
       select: { id: true, isActive: true, email: true, password: true },
       where: { email }
@@ -45,7 +44,7 @@ export class UserService {
       subject: user?.email
     });
 
-    return { token };
+    return token;
   }
 
   async delete(id: string): Promise<number> {
@@ -59,8 +58,8 @@ export class UserService {
     return 204;
   }
 
-  async patch(payload: IUserUpdate, userId: string): Promise<IUser> {
-    const user = await userRepository.findOneBy({ id: userId });
+  async patch(payload: IUserUpdate, id: string): Promise<IUser> {
+    const user = await userRepository.findOneBy({ id });
 
     if (payload.hasOwnProperty("isActive") || payload.hasOwnProperty("id")) {
       throw new UnauthorizedError("Não é possível atualizar os campos: isActive e id");
@@ -75,7 +74,7 @@ export class UserService {
     return instanceToInstance(updatedUser);
   }
 
-  async getUsers() {
+  async getUsers(): Promise<IUser[]> {
     const users = await userRepository.createQueryBuilder("users").getMany();
     return users;
   }

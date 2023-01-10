@@ -1,4 +1,4 @@
 import AppDataSource from "../data-source";
-import User from "../Entities/UserEntity";
+import User from "../entities/User.entity";
 
 export const userRepository = AppDataSource.getRepository(User);
