@@ -1,5 +1,5 @@
 import Competitions from "../entities/Competitions.entity";
-import { UnauthorizedError } from "../helpers/Errors.helper";
+import { ConflictError, UnauthorizedError } from "../helpers/Errors.helper";
 import { ICreateCompetition, IUpdateCompetition } from "../interfaces/competition.interface";
 import { competitionRepository } from "../repositories/competition.repository";
 import { userRepository } from "../repositories/user.repository";
@@ -58,5 +58,17 @@ export class CompetitionService {
     });
 
     return competitions;
+  }
+
+  async delete(id: string) {
+    const competition = await competitionRepository.findOneBy({ id });
+
+    if (competition?.isActive === false) {
+      throw new ConflictError("Essa competição não está ativa!");
+    }
+
+    await competitionRepository.update(id, { isActive: false });
+
+    return 204;
   }
 }
