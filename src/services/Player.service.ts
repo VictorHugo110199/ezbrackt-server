@@ -18,4 +18,10 @@ export class PlayerService {
 
     return player;
   }
+
+  async get(id: string) {
+    const competition = await competitionRepository.findOne({ where: { id }, relations: { players: true } });
+
+    return competition?.players;
+  }
 }

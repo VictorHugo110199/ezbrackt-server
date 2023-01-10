@@ -12,4 +12,11 @@ export class PlayerController {
 
     return res.status(201).json(player);
   }
+
+  async get(req: Request, res: Response) {
+    const { id } = req.params;
+    const data = await new PlayerService().get(id);
+
+    return res.status(200).json(data);
+  }
 }
