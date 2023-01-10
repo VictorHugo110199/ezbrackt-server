@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { ICreatePlayer } from "../interfaces/player.interface";
+import { ICreatePlayer, IPlayerPatch } from "../interfaces/player.interface";
 import { PlayerService } from "../services/Player.service";
 
 export class PlayerController {
@@ -11,5 +11,15 @@ export class PlayerController {
     const player = await new PlayerService().create(payload, id);
 
     return res.status(201).json(player);
+  }
+
+  async patch(req: Request, res: Response) {
+    const payload: IPlayerPatch = req.body;
+    const { id } = req.params;
+    const userId = req.user.id;
+
+    const player = await new PlayerService().update(payload, id, userId);
+
+    return res.status(200).json(player);
   }
 }
