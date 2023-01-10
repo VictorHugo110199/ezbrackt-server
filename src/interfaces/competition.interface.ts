@@ -5,15 +5,17 @@ export interface ICompetition {
   name: string;
   status: boolean;
   number_players: number;
-  description: string;
+  description?: string;
   createdAt: Date;
   updatedAt: Date;
   players: IPlayer[];
   brackets: IBracket[];
+  isActive?: boolean;
+  userId: string;
 }
 
 export interface ICreateCompetition {
   name: string;
   number_players: number;
-  description: string;
+  description?: string;
 }

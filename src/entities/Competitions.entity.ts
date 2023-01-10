@@ -18,21 +18,21 @@ class Competitions {
   id: string;
 
   @ManyToOne(() => User, (user) => user.id)
-  createUser: User;
+  userId: string;
 
-  @Column({ length: 30, nullable: false, unique: true })
+  @Column({ length: 30, nullable: false })
   name: string;
 
   @Column({ default: true })
   status: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   winner: string;
 
   @Column()
   number_players: number;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
   @CreateDateColumn()
@@ -46,6 +46,9 @@ class Competitions {
 
   @OneToMany(() => BracketCompetition, (bracket) => bracket.competition)
   brackets: BracketCompetition[];
+
+  @Column({ default: true })
+  isActive: boolean;
 }
 
 export default Competitions;
