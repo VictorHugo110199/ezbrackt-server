@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { ICreateCompetition } from "../interfaces/competition.interface";
+import { ICreateCompetition, IUpdateCompetition } from "../interfaces/competition.interface";
 import { CompetitionService } from "../services/Competitions.service";
 
 export class CompetitionController {
@@ -11,6 +11,15 @@ export class CompetitionController {
     const competition = await new CompetitionService().create(payload, id);
 
     return res.status(201).json(competition);
+  }
+
+  async patch(req: Request, res: Response) {
+    const payload: IUpdateCompetition = req.body;
+    const { id } = req.params;
+
+    const competitionUpdated = await new CompetitionService().patch(payload, id);
+
+    return res.status(200).json(competitionUpdated);
   }
 
   async getCompetition(req: Request, res: Response) {
