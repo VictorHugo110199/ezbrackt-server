@@ -13,6 +13,7 @@ export class PlayerController {
     return res.status(201).json(player);
   }
 
+
   async patch(req: Request, res: Response) {
     const payload: IPlayerPatch = req.body;
     const { id } = req.params;
@@ -21,5 +22,13 @@ export class PlayerController {
     const player = await new PlayerService().update(payload, id, userId);
 
     return res.status(200).json(player);
+    }
+
+  async get(req: Request, res: Response) {
+    const { id } = req.params;
+    const data = await new PlayerService().get(id);
+
+    return res.status(200).json(data);
+
   }
 }
