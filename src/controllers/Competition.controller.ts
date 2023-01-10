@@ -12,4 +12,10 @@ export class CompetitionController {
 
     return res.status(201).json(competition);
   }
+
+  async getCompetition(req: Request, res: Response) {
+    const competitions = await new CompetitionService().getCompetitions();
+
+    return res.json(competitions);
+  }
 }

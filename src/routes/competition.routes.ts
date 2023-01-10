@@ -9,3 +9,4 @@ const competitionController = new CompetitionController();
 export const competitionRoutes = Router();
 
 competitionRoutes.post("/", userMiddleware.tokenExists, competitionController.create);
+competitionRoutes.get("/", competitionController.getCompetition);
