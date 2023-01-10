@@ -3,7 +3,7 @@ import { DataSource } from "typeorm";
 
 import app from "../../app";
 import AppDataSource from "../../data-source";
-import { mockedLogin, mockedUser } from "../mocks/user";
+import { mockedInactiveLogin, mockedInactiveUser, mockedLogin, mockedUser } from "../mocks/user";
 
 describe("/login", () => {
   let connection: DataSource;
@@ -14,7 +14,7 @@ describe("/login", () => {
         connection = res;
       })
       .catch((err) => {
-        console.error("Error during Data Source initialization", err);
+        console.error("Error during Database initialization", err);
       });
 
     await request(app).post("/users").send(mockedUser);
@@ -24,35 +24,27 @@ describe("/login", () => {
     await connection.destroy();
   });
 
-  it("POST /login -  should be able to login with the user", async () => {
+  it("POST /login Deve ser possivel logar usuário", async () => {
     const response = await request(app).post("/login").send(mockedLogin);
 
     expect(response.body).toHaveProperty("token");
     expect(response.status).toBe(200);
   });
 
-  it("POST /login -  should not be able to login with the user with incorrect password or email", async () => {
+  it("POST /login -  Não deve ser possivel logar usuário com email ou senha incorretos.", async () => {
     const response = await request(app).post("/login").send({
-      email: "matheus@mail.com",
-      password: "1234567"
+      email: "Ayrton@mail.com",
+      password: "@Ayrton123"
     });
 
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(401);
   });
 
-  it("POST /login -  should not be able to login with the user with isActive = false", async () => {
-    const loginResponse = await request(app).post("/login").send(mockedLogin);
+  it("POST /login -  Não deve ser possivel logar usuario inativo", async () => {
+    await request(app).post("/users").send(mockedInactiveUser);
+    const response = await request(app).post("/login").send(mockedInactiveLogin);
 
-    const findUser = await request(app)
-      .get("/users")
-      .set("Authorization", `Bearer ${loginResponse.body.token as string}`);
-
-    await request(app)
-      .delete(`/users/${findUser.body[0].id as string}`)
-      .set("Authorization", `Bearer ${loginResponse.body.token as string}`);
-
-    const response = await request(app).post("/login").send(mockedLogin);
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(400);
   });
