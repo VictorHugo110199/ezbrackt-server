@@ -5,7 +5,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
-  ManyToOne
+  ManyToOne,
+  JoinColumn
 } from "typeorm";
 
 import BracketCompetition from "./BracketCompetition.entity";
@@ -18,7 +19,8 @@ class Competitions {
   id: string;
 
   @ManyToOne(() => User, (user) => user.id)
-  userId: string;
+  @JoinColumn()
+  user: User;
 
   @Column({ length: 30, nullable: false })
   name: string;
@@ -42,6 +44,7 @@ class Competitions {
   updatedAt: Date;
 
   @OneToMany(() => Players, (players) => players.id)
+  @JoinColumn()
   players: Players[];
 
   @OneToMany(() => BracketCompetition, (bracket) => bracket.competition)
