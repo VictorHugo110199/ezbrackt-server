@@ -5,9 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  JoinColumn
+  JoinColumn,
+  OneToMany
 } from "typeorm";
 
+import { Player } from "./Players.entity";
 import User from "./User.entity";
 
 @Entity("competitions")
@@ -42,6 +44,10 @@ class Competitions {
 
   @Column({ default: true })
   isActive: boolean;
+
+  @OneToMany(() => Player, (player) => player.competition)
+  @JoinColumn()
+  players: Player[];
 }
 
 export default Competitions;
