@@ -75,7 +75,10 @@ export class UserService {
   }
 
   async getUsers(): Promise<IUser[]> {
-    const users = await userRepository.createQueryBuilder("users").getMany();
+    const users = await userRepository.find({
+      where: { isActive: true }
+    });
+
     return users;
   }
 
