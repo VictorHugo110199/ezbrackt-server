@@ -3,7 +3,7 @@ import "reflect-metadata";
 import express from "express";
 
 import { errorMiddleware } from "./middlewares/error.middleware";
-import { routes } from "./routes";
+import { routes } from "./Routes";
 
 const app = express();
 
