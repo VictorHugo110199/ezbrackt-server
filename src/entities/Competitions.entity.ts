@@ -9,6 +9,7 @@ import {
   OneToMany
 } from "typeorm";
 
+import { Brackets } from "./Bracket.entity";
 import { Player } from "./Players.entity";
 import User from "./User.entity";
 
@@ -48,6 +49,9 @@ class Competitions {
   @OneToMany(() => Player, (player) => player.competition)
   @JoinColumn()
   players: Player[];
+
+  @OneToMany(() => Brackets, (bracket) => bracket.competition)
+  bracket: Brackets[];
 }
 
 export default Competitions;

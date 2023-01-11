@@ -1,5 +1,6 @@
 import { Router } from "express";
 
+import { BracketController } from "../controllers/Bracket.controller";
 import { CompetitionController } from "../controllers/Competition.controller";
 import { PlayerController } from "../controllers/Player.controller";
 import { CompetitionMiddleware } from "../middlewares/Competition.middleware";
@@ -54,3 +55,7 @@ competitionRoutes.get(
   competitionMiddleware.idExists,
   playerController.get
 );
+
+const bracketController = new BracketController();
+
+competitionRoutes.get("/:id/brackets", bracketController.create);

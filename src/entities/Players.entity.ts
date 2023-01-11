@@ -13,6 +13,9 @@ export class Player {
   @Column({ nullable: true })
   photo: string;
 
+  @Column({ default: true })
+  inGame: boolean;
+
   @ManyToOne(() => Competitions, (competition) => competition.players)
   competition: Competitions;
 }
