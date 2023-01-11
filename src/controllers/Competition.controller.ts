@@ -35,4 +35,12 @@ export class CompetitionController {
 
     return res.sendStatus(status);
   }
+
+  async getUserCompetition(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const competitions = await new CompetitionService().getPlayerCompetition(id);
+
+    return res.status(200).json(competitions);
+  }
 }
