@@ -21,7 +21,7 @@ export class CompetitionService {
     return newCompetition;
   }
 
-  async update(payload: IUpdateCompetition, campId: string) {
+  async update(payload: IUpdateCompetition, campId: string): Promise<Competitions> {
     const competition = await competitionRepository.findOneBy({ id: campId });
 
     if (payload.hasOwnProperty("number_players") || payload.hasOwnProperty("isActive")) {
@@ -47,7 +47,7 @@ export class CompetitionService {
     return competitions[0];
   }
 
-  async getCompetitions() {
+  async getCompetitions(): Promise<Competitions[]> {
     const competitions = await competitionRepository.find({
       where: {
         isActive: true
@@ -61,7 +61,7 @@ export class CompetitionService {
     return competitions;
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<number> {
     const competition = await competitionRepository.findOneBy({ id });
 
     if (competition?.isActive === false) {
