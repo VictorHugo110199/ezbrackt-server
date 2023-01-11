@@ -24,7 +24,7 @@ describe("/login", () => {
     await connection.destroy();
   });
 
-  it("GET /profile -  Must be able to list logged user", async () => {
+  it("GET /profile - Deve ser possível listar o usuário logado", async () => {
     await request(app).get("/profile").send(mockedUser);
     const loginResponse = await request(app).post("/login").send(mockedLogin);
 
