@@ -10,6 +10,7 @@ const userMiddleware = new UserMiddleware();
 const competitionController = new CompetitionController();
 const competitionMiddleware = new CompetitionMiddleware();
 const playerController = new PlayerController();
+const bracketController = new BracketController();
 
 export const competitionRoutes = Router();
 
@@ -56,6 +57,10 @@ competitionRoutes.get(
   playerController.get
 );
 
-const bracketController = new BracketController();
-
-competitionRoutes.get("/:id/brackets", bracketController.create);
+competitionRoutes.get(
+  "/:id/brackets",
+  userMiddleware.tokenExists,
+  competitionMiddleware.idExists,
+  competitionMiddleware.idValid,
+  bracketController.create
+);
