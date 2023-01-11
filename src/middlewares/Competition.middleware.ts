@@ -12,6 +12,7 @@ export class CompetitionMiddleware {
     if (!competition) {
       throw new NotFoundError("Competição não encontrada.");
     }
+
     next();
   }
 

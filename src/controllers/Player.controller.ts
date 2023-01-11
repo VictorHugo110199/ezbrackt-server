@@ -16,9 +16,8 @@ export class PlayerController {
   async patch(req: Request, res: Response) {
     const payload: IPlayerPatch = req.body;
     const { id } = req.params;
-    const userId = req.user.id;
 
-    const player = await new PlayerService().update(payload, id, userId);
+    const player = await new PlayerService().update(payload, id);
 
     return res.status(200).json(player);
   }
