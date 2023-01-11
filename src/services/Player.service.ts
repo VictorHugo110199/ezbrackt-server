@@ -19,7 +19,6 @@ export class PlayerService {
     return player;
   }
 
-
   async update(payload: IPlayerPatch, id: string, userId: string) {
     const player = await playerRepository.findOneBy({ id });
 
@@ -27,7 +26,7 @@ export class PlayerService {
 
     await playerRepository.save(updatedPlayer);
     return updatedPlayer;
-    }
+  }
 
   async get(id: string) {
     const competition = await competitionRepository.findOne({ where: { id }, relations: { players: true } });

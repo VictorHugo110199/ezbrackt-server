@@ -14,7 +14,7 @@ export const competitionRoutes = Router();
 
 competitionRoutes.post("/", userMiddleware.tokenExists, competitionController.create);
 
-competitionRoutes.get("/", competitionController.getCompetitions);
+competitionRoutes.get("/", userMiddleware.tokenExists, competitionController.getCompetitions);
 
 competitionRoutes.patch(
   "/:id",
@@ -32,7 +32,6 @@ competitionRoutes.delete(
   competitionController.delete
 );
 
-
 competitionRoutes.post("/:id/players", userMiddleware.tokenExists, playerController.create);
 
 competitionRoutes.patch("/:id/players", userMiddleware.tokenExists, playerController.patch);
@@ -44,4 +43,3 @@ competitionRoutes.get(
   competitionMiddleware.idExists,
   playerController.get
 );
-
