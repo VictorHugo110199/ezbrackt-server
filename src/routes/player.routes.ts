@@ -9,4 +9,10 @@ const playerController = new PlayerController();
 const userMiddleware = new UserMiddleware();
 const playerMiddleware = new PlayerMiddleware();
 
-playerRoutes.patch("/:id", userMiddleware.tokenExists, playerMiddleware.idExist, playerController.patch);
+playerRoutes.patch(
+  "/:id",
+  userMiddleware.tokenExists,
+  playerMiddleware.idExist,
+  playerMiddleware.ensurePlayerOwnerCompetition,
+  playerController.patch
+);
