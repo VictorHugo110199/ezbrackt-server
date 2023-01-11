@@ -1,10 +1,12 @@
 import { Router } from "express";
 
+import { CompetitionController } from "../controllers/Competition.controller";
 import { UserController } from "../controllers/User.controller";
 import { UserMiddleware } from "../middlewares/User.middleware";
 
 const userMiddleware = new UserMiddleware();
 const userController = new UserController();
+const competitionController = new CompetitionController();
 
 export const userRoutes = Router();
 
@@ -28,4 +30,11 @@ userRoutes.delete(
   userMiddleware.verifyUser,
   userMiddleware.verifyUserLogged,
   userController.delete
+);
+
+userRoutes.get(
+  "/:id/competitions",
+  userMiddleware.tokenExists,
+  userMiddleware.verifyUser,
+  competitionController.getUserCompetition
 );
