@@ -28,6 +28,7 @@ export class PlayerService {
 
   async update(payload: IPlayerPatch, id: string): Promise<Player> {
     const player = await playerRepository.findOneBy({ id });
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const updatedPlayer = playerRepository.create({ ...player, ...payload });
 
     await playerRepository.save(updatedPlayer);
@@ -37,6 +38,7 @@ export class PlayerService {
   async get(id: string): Promise<Player[] | undefined> {
     const competition = await competitionRepository.findOne({ where: { id }, relations: { players: true } });
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return competition?.players;
   }
 }
