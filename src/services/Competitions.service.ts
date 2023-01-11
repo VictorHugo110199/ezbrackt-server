@@ -73,7 +73,7 @@ export class CompetitionService {
     return 204;
   }
 
-  async getPlayerCompetition(id: string) {
+  async getPlayerCompetition(id: string): Promise<Competitions[]> {
     const userFound = await userRepository.findOneBy({ id });
     const competition = await competitionRepository.find({
       where: {
