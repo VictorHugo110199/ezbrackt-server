@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 import Competitions from "./Competitions.entity";
 import { Player } from "./Players.entity";
@@ -11,28 +11,25 @@ export class Brackets {
   @Column()
   currentRound: number;
 
-  @Column()
-  keyRound: number;
-
   @Column({ default: true })
   status: boolean;
 
-  @OneToOne(() => Player, (player) => player.id)
+  @ManyToOne(() => Player, (player) => player.id)
   @JoinColumn()
   winner: Player;
 
-  @OneToOne(() => Player, (player) => player.id)
+  @ManyToOne(() => Player, (player) => player.id)
   @JoinColumn()
-  loser: string;
+  loser: Player;
 
   @ManyToOne(() => Competitions, (competition) => competition.bracket)
   competition: Competitions;
 
-  @OneToOne(() => Player, (player) => player.id)
+  @ManyToOne(() => Player, (player) => player.id)
   @JoinColumn()
   player1: Player;
 
-  @OneToOne(() => Player, (player) => player.id)
+  @ManyToOne(() => Player, (player) => player.id)
   @JoinColumn()
   player2: Player;
 }

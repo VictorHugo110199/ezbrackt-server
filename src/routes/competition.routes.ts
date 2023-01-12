@@ -64,3 +64,5 @@ competitionRoutes.get(
   competitionMiddleware.idValid,
   bracketController.create
 );
+
+competitionRoutes.patch("/:id/brackets", bracketController.nextBracket);

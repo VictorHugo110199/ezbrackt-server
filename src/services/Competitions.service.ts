@@ -54,7 +54,8 @@ export class CompetitionService {
       },
       relations: {
         user: true,
-        players: true
+        players: true,
+        bracket: true
       }
     });
 
