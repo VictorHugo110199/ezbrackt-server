@@ -1,6 +1,5 @@
 import { Router } from "express";
 
-import { BracketController } from "../controllers/Bracket.controller";
 import { CompetitionController } from "../controllers/Competition.controller";
 import { PlayerController } from "../controllers/Player.controller";
 import { CompetitionMiddleware } from "../middlewares/Competition.middleware";
@@ -10,7 +9,6 @@ const userMiddleware = new UserMiddleware();
 const competitionController = new CompetitionController();
 const competitionMiddleware = new CompetitionMiddleware();
 const playerController = new PlayerController();
-const bracketController = new BracketController();
 
 export const competitionRoutes = Router();
 
@@ -56,13 +54,3 @@ competitionRoutes.get(
   competitionMiddleware.idExists,
   playerController.get
 );
-
-competitionRoutes.get(
-  "/:id/brackets",
-  userMiddleware.tokenExists,
-  competitionMiddleware.idExists,
-  competitionMiddleware.idValid,
-  bracketController.create
-);
-
-competitionRoutes.patch("/:id/brackets", bracketController.nextBracket);

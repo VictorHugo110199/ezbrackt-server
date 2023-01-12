@@ -2,10 +2,10 @@ import { Router } from "express";
 
 import { BracketsController } from "../controllers/Brackets.controller";
 
-const bracketsRouter = Router();
+export const bracketsRouter = Router();
 
-bracketsRouter.post("/init/:id", new BracketsController().create);
-bracketsRouter.post("/winner/:idBrackets", new BracketsController().winnerPlayer);
-bracketsRouter.post("/createNew/:idCompetition", new BracketsController().createNew);
+const bracketsController = new BracketsController();
 
-export default bracketsRouter;
+bracketsRouter.post("/init/:id", bracketsController.create);
+bracketsRouter.post("/winner/:idBrackets", bracketsController.winnerPlayer);
+bracketsRouter.post("/createNew/:idCompetition", bracketsController.createNew);
