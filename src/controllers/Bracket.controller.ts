@@ -8,4 +8,12 @@ export class BracketController {
 
     return res.status(201).json(data);
   }
+
+  async nextBracket(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const data = await new BracketService().nextBracket(id);
+
+    return res.json(data);
+  }
 }
