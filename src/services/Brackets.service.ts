@@ -60,8 +60,6 @@ export class BracketService {
       rounds.push(bracket);
     }
 
-    const getPlayer = await playerRepository.find({ where: { competition: { id } } });
-
     for (let i = 0; i < rounds.length; i++) {
       for (let j = 0; j < rounds[i].length; j++) {
         if (rounds[i][j].player1.inGame) {
