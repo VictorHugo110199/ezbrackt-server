@@ -17,7 +17,6 @@
   },
   "scripts": {
     "dev": "tsnd --ignore-watch node_modules src/server.ts",
-    "lint": "eslint ./src/**/*.ts",
     "build": "tsc",
     "start": "node dist/src/server.js",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/default",
