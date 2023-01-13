@@ -27,10 +27,8 @@ describe("/login", () => {
   it("GET /profile - Deve ser possível listar o usuário logado", async () => {
     await request(app).get("/profile").send(mockedUser);
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-
-    const response = await request(app)
-      .get("/profile")
-      .set("Authorization", `Bearer ${loginResponse.body.token as string}`);
+    const token: string = loginResponse.body.token;
+    const response = await request(app).get("/profile").set("Authorization", `Bearer ${token}`);
 
     expect(response.body).toHaveProperty("name");
     expect(response.body).toHaveProperty("email");
