@@ -31,9 +31,6 @@ class User {
   @Column({ default: true })
   isActive: boolean;
 
-  @Column({nullable:true})
-  test: boolean
-
   @CreateDateColumn()
   createdAt: Date;
 
