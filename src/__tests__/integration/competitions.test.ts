@@ -26,12 +26,12 @@ describe("/competitions", () => {
   it("POST /competition Deve ser possivel criar uma competição", async () => {
     await request(app).post("/users").send(mockedUser);
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-    const token = loginResponse.body.token;
+    const token: string = loginResponse.body.token;
 
     const response = await request(app)
       .post("/competitions")
       .send(mockCompetition)
-      .set("Authorization", `Bearer ${token as string}`);
+      .set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toBe(201);
     expect(response.body).toHaveProperty("id");
@@ -55,10 +55,8 @@ describe("/competitions", () => {
 
   it("GET /competitions Deve ser possivel listar todas as competições", async () => {
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-    const token = loginResponse.body.token;
-    const response = await request(app)
-      .get("/competitions")
-      .set("Authorization", `Bearer ${token as string}`);
+    const token: string = loginResponse.body.token;
+    const response = await request(app).get("/competitions").set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toBe(200);
     expect(Array.isArray(response.body)).toBe(true);
@@ -74,17 +72,15 @@ describe("/competitions", () => {
 
   it("PATCH /competitions Deve ser possivel editar uma competição", async () => {
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-    const token = loginResponse.body.token;
+    const token: string = loginResponse.body.token;
 
-    const competitions = await request(app)
-      .get("/competitions")
-      .set("Authorization", `Bearer ${token as string}`);
+    const competitions = await request(app).get("/competitions").set("Authorization", `Bearer ${token}`);
 
-    const id = competitions.body[0].id;
+    const id: string = competitions.body[0].id;
     const response = await request(app)
-      .patch(`/competitions/${id as string}`)
+      .patch(`/competitions/${id}`)
       .send({ name: "Teste de editar" })
-      .set("Authorization", `Bearer ${token as string}`);
+      .set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toBe(200);
     expect(response.body.name).toEqual("Teste de editar");
@@ -92,16 +88,12 @@ describe("/competitions", () => {
 
   it("PATCH /competitions Não deve ser possivel editar uma competição sem token de autentiocação", async () => {
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-    const token = loginResponse.body.token;
+    const token: string = loginResponse.body.token;
 
-    const competitions = await request(app)
-      .get("/competitions")
-      .set("Authorization", `Bearer ${token as string}`);
+    const competitions = await request(app).get("/competitions").set("Authorization", `Bearer ${token}`);
 
-    const id = competitions.body[0].id;
-    const response = await request(app)
-      .patch(`/competitions/${id as string}`)
-      .send({ name: "Teste de editar" });
+    const id: string = competitions.body[0].id;
+    const response = await request(app).patch(`/competitions/${id}`).send({ name: "Teste de editar" });
 
     expect(response.statusCode).toBe(401);
     expect(response.body).toHaveProperty("message");
@@ -109,12 +101,12 @@ describe("/competitions", () => {
 
   it("PATCH /competitions Não deve ser possivel editar um campeonato com um id inválido", async () => {
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-    const token = loginResponse.body.token;
+    const token: string = loginResponse.body.token;
 
     const response = await request(app)
       .patch(`/competitions/07389483-27e8-4870-809e-90b5e3533045`)
       .send({ name: "Teste de editar" })
-      .set("Authorization", `Bearer ${token as string}`);
+      .set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toBe(404);
     expect(response.body).toHaveProperty("message");
@@ -123,17 +115,15 @@ describe("/competitions", () => {
   it("PATCH /compeitions Não deve ser possivel editar campeonatos de outros usuários.", async () => {
     await request(app).post("/users").send(mockedUserDeleted);
     const loginResponse = await request(app).post("/login").send(mockedLoginDeleted);
-    const token = loginResponse.body.token;
+    const token: string = loginResponse.body.token;
 
-    const competitions = await request(app)
-      .get("/competitions")
-      .set("Authorization", `Bearer ${token as string}`);
+    const competitions = await request(app).get("/competitions").set("Authorization", `Bearer ${token}`);
 
-    const id = competitions.body[0].id;
+    const id: string = competitions.body[0].id;
     const response = await request(app)
-      .patch(`/competitions/${id as string}`)
+      .patch(`/competitions/${id}`)
       .send({ name: "Teste de editar" })
-      .set("Authorization", `Bearer ${token as string}`);
+      .set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toBe(401);
     expect(response.body).toHaveProperty("message");
@@ -141,14 +131,12 @@ describe("/competitions", () => {
 
   it("DELETE /competitions Não deve ser possivel deletar uma competição sem token de autentiocação", async () => {
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-    const token = loginResponse.body.token;
+    const token: string = loginResponse.body.token;
 
-    const competitions = await request(app)
-      .get("/competitions")
-      .set("Authorization", `Bearer ${token as string}`);
+    const competitions = await request(app).get("/competitions").set("Authorization", `Bearer ${token}`);
 
-    const id = competitions.body[0].id;
-    const response = await request(app).delete(`/competitions/${id as string}`);
+    const id: string = competitions.body[0].id;
+    const response = await request(app).delete(`/competitions/${id}`);
 
     expect(response.statusCode).toBe(401);
     expect(response.body).toHaveProperty("message");
@@ -156,11 +144,11 @@ describe("/competitions", () => {
 
   it("DELETE /competitions Não deve ser possivel deletar um campeonato com um id inválido", async () => {
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-    const token = loginResponse.body.token;
+    const token: string = loginResponse.body.token;
 
     const response = await request(app)
       .delete(`/competitions/07389483-27e8-4870-809e-90b5e3533045`)
-      .set("Authorization", `Bearer ${token as string}`);
+      .set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toBe(404);
     expect(response.body).toHaveProperty("message");
@@ -168,16 +156,12 @@ describe("/competitions", () => {
 
   it("DELETE /compeitions Não deve ser possivel editar campeonatos de outros usuários.", async () => {
     const loginResponse = await request(app).post("/login").send(mockedLoginDeleted);
-    const token = loginResponse.body.token;
+    const token: string = loginResponse.body.token;
 
-    const competitions = await request(app)
-      .get("/competitions")
-      .set("Authorization", `Bearer ${token as string}`);
+    const competitions = await request(app).get("/competitions").set("Authorization", `Bearer ${token}`);
 
-    const id = competitions.body[0].id;
-    const response = await request(app)
-      .delete(`/competitions/${id as string}`)
-      .set("Authorization", `Bearer ${token as string}`);
+    const id: string = competitions.body[0].id;
+    const response = await request(app).delete(`/competitions/${id}`).set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toBe(401);
     expect(response.body).toHaveProperty("message");
@@ -185,16 +169,12 @@ describe("/competitions", () => {
 
   it("DELETE /competitions Deve ser possivel deletar uma competição", async () => {
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-    const token = loginResponse.body.token;
+    const token: string = loginResponse.body.token;
 
-    const competitions = await request(app)
-      .get("/competitions")
-      .set("Authorization", `Bearer ${token as string}`);
+    const competitions = await request(app).get("/competitions").set("Authorization", `Bearer ${token}`);
 
-    const id = competitions.body[0].id;
-    const response = await request(app)
-      .delete(`/competitions/${id as string}`)
-      .set("Authorization", `Bearer ${token as string}`);
+    const id: string = competitions.body[0].id;
+    const response = await request(app).delete(`/competitions/${id}`).set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toBe(204);
   });

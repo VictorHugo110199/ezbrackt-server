@@ -55,10 +55,8 @@ describe("/users", () => {
 
   it("GET /users Deve ser possivel listar todos os usuários", async () => {
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-    const token = loginResponse.body.token;
-    const response = await request(app)
-      .get("/users")
-      .set("Authorization", `Bearer ${token as string}`);
+    const token: string = loginResponse.body.token;
+    const response = await request(app).get("/users").set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toBe(200);
     expect(Array.isArray(response.body)).toBe(true);
@@ -74,13 +72,11 @@ describe("/users", () => {
 
   it("DELETE /users/:id Não deve ser possivel deletar usuário sem autenticação", async () => {
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-    const token = loginResponse.body.token;
-    const user = await request(app)
-      .get("/users")
-      .set("Authorization", `Bearer ${token as string}`);
-    const id = user.body[0].id;
+    const token: string = loginResponse.body.token;
+    const user = await request(app).get("/users").set("Authorization", `Bearer ${token}`);
+    const id: string = user.body[0].id;
 
-    const response = await request(app).delete(`/users/${id as string}`);
+    const response = await request(app).delete(`/users/${id}`);
 
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(401);
@@ -89,28 +85,24 @@ describe("/users", () => {
   it("DELETE /users/:id Deve ser possivel deletar usuário", async () => {
     const userToBeDeleted = await request(app).post("/users").send(mockedUserDeleted);
     const loginResponse = await request(app).post("/login").send(mockedLoginDeleted);
-    const token = loginResponse.body.token;
-    const id = userToBeDeleted.body.id;
+    const token: string = loginResponse.body.token;
+    const id: string = userToBeDeleted.body.id;
 
-    const response = await request(app)
-      .delete(`/users/${id as string}`)
-      .set("Authorization", `Bearer ${token as string}`);
+    const response = await request(app).delete(`/users/${id}`).set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(204);
   });
 
   it("DELETE /users/:id Não deve ser possivel deletar usuário inativo", async () => {
     const inactiveUser = await request(app).post("/users").send(mockedInactiveUser);
-    const id = inactiveUser.body.id;
+    const id: string = inactiveUser.body.id;
 
-    const token = jwt.sign({ id: inactiveUser.body.id as string }, process.env.SECRET_KEY as string, {
+    const token: string = jwt.sign({ id: inactiveUser.body.id as string }, process.env.SECRET_KEY as string, {
       expiresIn: "24h",
       subject: inactiveUser?.body.email as string
     });
 
-    const response = await request(app)
-      .delete(`/users/${id as string}`)
-      .set("Authorization", `Bearer ${token}`);
+    const response = await request(app).delete(`/users/${id}`).set("Authorization", `Bearer ${token}`);
     expect(response.status).toBe(409);
     expect(response.body).toHaveProperty("message");
   });
@@ -128,12 +120,10 @@ describe("/users", () => {
 
   it("PATCH /users/:id Não deve ser possivel atualizar usuário sem token de autenticação", async () => {
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-    const token = loginResponse.body.token;
-    const user = await request(app)
-      .get("/users")
-      .set("Authorization", `Bearer ${token as string}`);
-    const id = user.body[0].id;
-    const response = await request(app).patch(`/users/${id as string}`);
+    const token: string = loginResponse.body.token;
+    const user = await request(app).get("/users").set("Authorization", `Bearer ${token}`);
+    const id: string = user.body[0].id;
+    const response = await request(app).patch(`/users/${id}`);
 
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(401);
@@ -141,11 +131,11 @@ describe("/users", () => {
 
   it("PATCH /users/:id Não deve ser possivel atualizar usuario com id invalido", async () => {
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-    const token = loginResponse.body.token;
+    const token: string = loginResponse.body.token;
 
     const response = await request(app)
       .patch(`/users/13970660-5dbe-423a-9a9d-5c23b37943cf`)
-      .set("Authorization", `Bearer ${token as string}`)
+      .set("Authorization", `Bearer ${token}`)
       .send({ name: "Gustavo" });
 
     expect(response.body).toHaveProperty("message");
@@ -154,21 +144,17 @@ describe("/users", () => {
 
   it("PATCH /users/:id Deve ser possivel atualizar usuário", async () => {
     const loginResponse = await request(app).post("/login").send(mockedLogin);
-    const token = loginResponse.body.token;
+    const token: string = loginResponse.body.token;
 
-    const user = await request(app)
-      .get("/users")
-      .set("Authorization", `Bearer ${token as string}`);
-    const id = user.body[0].id;
+    const user = await request(app).get("/users").set("Authorization", `Bearer ${token}`);
+    const id: string = user.body[0].id;
 
     const response = await request(app)
-      .patch(`/users/${id as string}`)
-      .set("Authorization", `Bearer ${token as string}`)
+      .patch(`/users/${id}`)
+      .set("Authorization", `Bearer ${token}`)
       .send({ name: "Gustavo", email: "Gustavo@mail.com" });
 
-    const userUpdated = await request(app)
-      .get("/users")
-      .set("Authorization", `Bearer ${token as string}`);
+    const userUpdated = await request(app).get("/users").set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(200);
     expect(userUpdated.body[0].name).toEqual("Gustavo");
