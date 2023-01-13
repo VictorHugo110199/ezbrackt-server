@@ -43,7 +43,7 @@ describe("/competitions", () => {
     expect(response.body).toHaveProperty("updatedAt");
     expect(response.body).toHaveProperty("isActive");
     expect(response.body.name).toEqual("Torneio da Kenzie");
-    expect(response.body.number_players).toEqual(8);
+    expect(response.body.number_players).toEqual(4);
   });
 
   it("POST /competitions Não deve ser possivel criar uma competição sem token de autenticação", async () => {
