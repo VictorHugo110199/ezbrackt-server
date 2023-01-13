@@ -28,7 +28,6 @@ export class PlayerService {
 
   async update(payload: IPlayerPatch, id: string): Promise<Player> {
     const player = await playerRepository.findOneBy({ id });
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const updatedPlayer = playerRepository.create({ ...player, ...payload });
 
     await playerRepository.save(updatedPlayer);

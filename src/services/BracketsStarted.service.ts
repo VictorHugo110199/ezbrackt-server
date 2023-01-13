@@ -79,6 +79,7 @@ export class BracketsStartedService {
         const playerLoser = await playerRepository.findOneBy({
           id: bracket.player2.id
         });
+
         if (playerLoser) {
           bracket.loser = playerLoser;
         }
@@ -86,6 +87,7 @@ export class BracketsStartedService {
         const playerLoser = await playerRepository.findOneBy({
           id: bracket.player1.id
         });
+
         if (playerLoser) {
           bracket.loser = playerLoser;
         }
