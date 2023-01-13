@@ -5,16 +5,6 @@
   "main": "index.js",
   "author": "EzBracket Team",
   "license": "MIT",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "./src/**/*.ts": [
-      "yarn lint --fix"
-    ]
-  },
   "scripts": {
     "dev": "tsnd --ignore-watch node_modules src/server.ts",
     "build": "tsc",
