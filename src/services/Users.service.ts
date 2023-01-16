@@ -7,8 +7,9 @@ import { ICreateUser, IUser, IUserLogin, IUserUpdate } from "../interfaces/user.
 import { userRepository } from "../repositories/user.repository";
 
 export class UserService {
-  async create(payload: ICreateUser): Promise<IUser> {
-    const { email, isActive, name, password, photo } = payload;
+  async create(payload: ICreateUser, photo: string): Promise<IUser> {
+    const { email, isActive, name, password } = payload;
+
     const hashPassword = await bcrypt.hash(password, 10);
 
     const newUser = userRepository.create({

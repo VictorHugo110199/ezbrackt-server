@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import { PlayerController } from "../controllers/Player.controller";
+import { cloudinaryFunction, uploadImage } from "../middlewares/photo.middleware";
 import { DataMiddleware } from "../middlewares/Data.middleware";
 import { PlayerMiddleware } from "../middlewares/Player.middleware";
 import { UserMiddleware } from "../middlewares/User.middleware";
@@ -15,6 +16,8 @@ const playerSchema = PlayerSchema
 
 playerRoutes.patch(
   "/:id",
+  uploadImage,
+  cloudinaryFunction,
   userMiddleware.tokenExists,
   playerMiddleware.idExist,
   dataMiddleware.ensureData(playerSchema.update),

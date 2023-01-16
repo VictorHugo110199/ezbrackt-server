@@ -7,8 +7,9 @@ export class PlayerController {
   async create(req: Request, res: Response) {
     const payload: ICreatePlayer = req.body;
     const { id } = req.params;
+    const photo: string = req.body.img.url;
 
-    const player = await new PlayerService().create(payload, id);
+    const player = await new PlayerService().create(payload, id, photo);
 
     return res.status(201).json(player);
   }
@@ -16,8 +17,9 @@ export class PlayerController {
   async patch(req: Request, res: Response) {
     const payload: IPlayerPatch = req.body;
     const { id } = req.params;
+    const photo: string = req.body.img.url;
 
-    const player = await new PlayerService().update(payload, id);
+    const player = await new PlayerService().update(payload, id, photo);
 
     return res.status(200).json(player);
   }

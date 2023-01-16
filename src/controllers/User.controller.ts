@@ -6,7 +6,9 @@ import { UserService } from "../services/Users.service";
 export class UserController {
   async create(req: Request, res: Response) {
     const payload: ICreateUser = req.body;
-    const user = await new UserService().create(payload);
+    const photo: string = req.body.img.url;
+
+    const user = await new UserService().create(payload, photo);
 
     return res.status(201).json(user);
   }
