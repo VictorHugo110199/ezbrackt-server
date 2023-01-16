@@ -1,9 +1,12 @@
+import { Brackets } from "../entities/Bracket.entity";
+import Competitions from "../entities/Competitions.entity";
+import { BadRequestError } from "../helpers/Errors.helper";
 import { bracketRepository } from "../repositories/bracket.repository";
 import { competitionRepository } from "../repositories/competition.repository";
 import { playerRepository } from "../repositories/player.repository";
 
 export class BracketsStartedService {
-  async create(idCompetition: string) {
+  async create(idCompetition: string): Promise<Competitions | null> {
     const competition = await competitionRepository.findOne({
       where: {
         id: idCompetition
@@ -50,7 +53,7 @@ export class BracketsStartedService {
     return competitionBracket;
   }
 
-  async winnerPlayer(idBrackets: string, winner: string) {
+  async winnerPlayer(idBrackets: string, winner: string): Promise<Brackets | null> {
     const bracket = await bracketRepository.findOne({
       where: {
         id: idBrackets
@@ -76,6 +79,7 @@ export class BracketsStartedService {
         const playerLoser = await playerRepository.findOneBy({
           id: bracket.player2.id
         });
+
         if (playerLoser) {
           bracket.loser = playerLoser;
         }
@@ -83,6 +87,7 @@ export class BracketsStartedService {
         const playerLoser = await playerRepository.findOneBy({
           id: bracket.player1.id
         });
+
         if (playerLoser) {
           bracket.loser = playerLoser;
         }
@@ -90,12 +95,13 @@ export class BracketsStartedService {
       await bracketRepository.save(bracket);
     }
     if (bracket) {
-      this.createNew(bracket?.competition.id);
+      this.createNewBracket(bracket?.competition.id);
     }
+
     return bracket;
   }
 
-  async createNew(idCompetition: string) {
+  async createNewBracket(idCompetition: string): Promise<Competitions | null> {
     const competitionBracket = await competitionRepository.findOne({
       where: {
         id: idCompetition
@@ -110,6 +116,10 @@ export class BracketsStartedService {
         }
       }
     });
+
+    if (!competitionBracket?.bracket.length) {
+      throw new BadRequestError("O chaveamento ainda não foi criado!");
+    }
 
     let finishBracket = true;
     const playersWinner: any[] = [];
