@@ -54,4 +54,8 @@ export class UserController {
 
     return res.status(200).json(data);
   }
+
+  excluir() {
+    console.log("excluir");
+  }
 }
