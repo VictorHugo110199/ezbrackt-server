@@ -8,18 +8,23 @@
 
 <br/>
 
-# 🦾 **Tecnologias utilizadas**
+## 🦾 **Tecnologias utilizadas**
 - **TypeScript**
 - **NodeJS**
 - **Express**
 - **Express-async-errors**
 - **Jest**
+- **Supertest**
 - **PostgreSQL**
 - **Bcrypt**
 - **Json Web Token**
 - **Class-transformer**
 - **Dotenv**
 - **TypeORM**
+- **Multer**
+- **Mime-types**
+- **Cloudinary**
+- **Husky**
 
 <br/>
 
@@ -40,7 +45,7 @@ yarn dev
 
 <br>
 
-# 🔨 **Sobre os testes**
+## 🔨 **Sobre os testes**
 
 Essa aplicação possui testes, que serão utilizados para validar, se todas as regras de negócio foram aplicadas de maneira correta.
 
@@ -106,7 +111,7 @@ Após rodar um dos comandos aparecerá um log no seu terminal, contendo as infor
 
 <br>
 
-# ➡️ **Rotas da aplicação**
+## ➡️ **Rotas da aplicação**
 ### Rotas do usuário
 
 #### 1) Criação do usuário - POST /users
