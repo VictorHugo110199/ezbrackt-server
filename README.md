@@ -267,3 +267,44 @@ Exemplo de response caso o usuário não esteja autenticado - 401
 	"message": "Token inválido"
 }
 ```
+
+<br>
+
+#### 5) Editar as informações do usuário - PATCH /users/:id
+Essa rota só pode ser acessada por usuários autenticados.
+
+``
+Exemplo de body
+``
+
+```
+{
+	"name": "Gustavo Ferreira",
+	"email": "gustavoferreira@email.com",
+}
+```
+
+``
+Exemplo de response - 200
+`` 
+
+```
+{
+	"id": "a96d9e9f-6b40-4611-b6dd-d064ded7ac9b",
+	"name": "Gustavo Ferreira",
+	"email": "gustavoferreira@email.com",
+	"photo": null,
+	"isActive": true,
+	"createdAt": "2023-01-12T16:08:21.774Z",
+	"updatedAt": "2023-01-16T16:08:21.774Z"
+}
+```
+
+``
+Exemplo de response caso o usuário não esteja autenticado - 401
+`` 
+```
+{
+	"message": "Token inválido"
+}
+```
