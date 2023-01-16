@@ -148,3 +148,53 @@ Exemplo de response com e-mail já existente - 409
 	"message": "E-mail já cadastrado!"
 }
 ```
+
+<br>
+
+#### 2) Listar todos os usuários - GET /users
+Essa rota só pode ser acessada por usuários autenticados.
+
+``
+Exemplo de response - 200
+`` 
+
+```
+[
+	{
+		"id": "21b55338-cf2e-4267-9a9b-6d9c75199893",
+		"name": "Enrico",
+		"email": "enrico123@email.com",
+		"photo": null,
+		"isActive": true,
+		"createdAt": "2023-01-11T13:12:53.946Z",
+		"updatedAt": "2023-01-11T13:12:53.946Z"
+	},
+	{
+		"id": "9360465e-59a1-4226-868e-e5ac83873302",
+		"name": "Matheus Felipe",
+		"email": "matheus@email.com",
+		"photo": null,
+		"isActive": true,
+		"createdAt": "2023-01-10T18:38:49.853Z",
+		"updatedAt": "2023-01-11T16:46:51.845Z"
+	},
+	{
+		"id": "a96d9e9f-6b40-4611-b6dd-d064ded7ac9b",
+		"name": "gustavo",
+		"email": "gustavo@email.com",
+		"photo": null,
+		"isActive": true,
+		"createdAt": "2023-01-12T16:08:21.774Z",
+		"updatedAt": "2023-01-12T16:08:21.774Z"
+	}
+]
+```
+
+``
+Exemplo de response caso o usuário não esteja autenticado - 401
+`` 
+```
+{
+	"message": "Token inválido"
+}
+```
