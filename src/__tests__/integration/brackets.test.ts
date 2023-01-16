@@ -60,7 +60,7 @@ describe("/brackets", () => {
   });
 
   it("POST /brackets Deve ser possivel criar o chaveamento inicial do torneio", async () => {
-    const response = await request(app).post(`/brackets/init/${id}`).set("Authorization", `Bearer ${token}`);
+    const response = await request(app).post(`/brackets/${id}`).set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toBe(201);
     expect(response.body).toHaveProperty("id");
@@ -78,13 +78,18 @@ describe("/brackets", () => {
   });
 
   it("POST /brackets Deve ser possivel declarar o vencedor da rodada", async () => {
-    const bracket = await request(app).post(`/brackets/init/${id}`).set("Authorization", `Bearer ${token}`);
+    const bracket = await request(app).post(`/brackets/${id}`).set("Authorization", `Bearer ${token}`);
 
     const bracketId: string = bracket.body.bracket[0].id;
 
-    const winner = bracket.body.bracket[0].player2;
+    const winner = bracket.body.bracket[0].player1;
+    console.log(winner);
+    const response = await request(app)
+      .post(`/brackets/winner/${bracketId}`)
+      .send({ winner: winner.id })
+      .set("Authorization", `Bearer ${token}`);
 
-    const response = await request(app).post(`/brackets/winner/${bracketId}`).send({ winner: winner.id });
+    console.log("Response", response.body);
 
     expect(response.statusCode).toBe(201);
     expect(response.body).toHaveProperty("id");
@@ -101,15 +106,13 @@ describe("/brackets", () => {
   });
 
   it("POST /brackets Deve ser possivel gerar a proxima rodada", async () => {
-    const bracket = await request(app).post(`/brackets/init/${id}`).set("Authorization", `Bearer ${token}`);
+    const bracket = await request(app).post(`/brackets/${id}`).set("Authorization", `Bearer ${token}`);
     const bracketId: string = bracket.body.bracket[0].id;
 
     const winner = bracket.body.bracket[0].player2;
 
     await request(app).post(`/brackets/winner/${bracketId}`).send({ winner: winner.id });
-    const response = await request(app)
-      .post(`/brackets/createNew/${id}`)
-      .set("Authorization", `Bearer ${token}`);
+    const response = await request(app).post(`/brackets/games/${id}`).set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toBe(201);
     expect(response.body).toHaveProperty("id");
