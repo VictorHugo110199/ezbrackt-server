@@ -198,3 +198,40 @@ Exemplo de response caso o usuário não esteja autenticado - 401
 	"message": "Token inválido"
 }
 ```
+
+#### 3) Listar um usuário pelo ID - GET /users/:id
+Essa rota só pode ser acessada por usuários autenticados.
+
+``
+Exemplo de response - 200
+`` 
+
+```
+{
+	"id": "d355d8cf-db7a-49db-9e8c-be6098e901d8",
+	"name": "Matheus",
+	"email": "devmatheus@email.com",
+	"photo": null,
+	"isActive": true,
+	"createdAt": "2023-01-16T18:03:53.434Z",
+	"updatedAt": "2023-01-16T18:03:53.434Z"
+}
+```
+
+``
+Exemplo de response caso o usuário não esteja autenticado - 401
+`` 
+```
+{
+	"message": "Token inválido"
+}
+```
+
+``
+Exemplo de response caso o usuário não seja encontrado ou não exista - 404
+`` 
+```
+{
+	"message": "Usuário não encontrado."
+}
+```
