@@ -5,8 +5,8 @@ import { competitionRepository } from "../repositories/competition.repository";
 import { playerRepository } from "../repositories/player.repository";
 
 export class PlayerService {
-  async create(payload: ICreatePlayer, id: string): Promise<Player> {
-    const { name, photo } = payload;
+  async create(payload: ICreatePlayer, id: string, photo: string): Promise<Player> {
+    const { name } = payload;
 
     const competition = await competitionRepository.find({ where: { id }, relations: { players: true } });
     const foundCompetition = await competitionRepository.findOneBy({ id });
@@ -26,10 +26,12 @@ export class PlayerService {
     return player;
   }
 
-  async update(payload: IPlayerPatch, id: string): Promise<Player> {
+  async update(payload: IPlayerPatch, id: string, photo: string): Promise<Player> {
+    const { inGame, name } = payload;
+
     const player = await playerRepository.findOneBy({ id });
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    const updatedPlayer = playerRepository.create({ ...player, ...payload });
+
+    const updatedPlayer = playerRepository.create({ ...player, name, inGame, photo });
 
     await playerRepository.save(updatedPlayer);
     return updatedPlayer;

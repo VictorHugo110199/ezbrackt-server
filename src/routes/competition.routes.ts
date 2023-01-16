@@ -3,6 +3,7 @@ import { Router } from "express";
 import { CompetitionController } from "../controllers/Competition.controller";
 import { PlayerController } from "../controllers/Player.controller";
 import { CompetitionMiddleware } from "../middlewares/Competition.middleware";
+import { cloudinaryFunction, uploadImage } from "../middlewares/photo.middleware";
 import { UserMiddleware } from "../middlewares/User.middleware";
 
 const userMiddleware = new UserMiddleware();
@@ -34,6 +35,8 @@ competitionRoutes.delete(
 
 competitionRoutes.post(
   "/:id/players",
+  uploadImage,
+  cloudinaryFunction,
   userMiddleware.tokenExists,
   competitionMiddleware.idExists,
   playerController.create
