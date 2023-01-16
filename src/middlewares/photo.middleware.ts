@@ -28,7 +28,7 @@ const multerFilter = (req: Request, file: Express.Multer.File, callback: multer.
   callback(null, false);
 };
 
-export const cloudinaryFunction = async (req: Request, res: Response, next: NextFunction) => {
+export const cloudinaryFunction = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const upload = await cloudinary.uploader.upload(req.file!.path, (_error, result) => result);
   req.body.img = upload;
 

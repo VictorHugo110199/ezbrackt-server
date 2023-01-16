@@ -87,7 +87,7 @@ export class UserService {
     const user = await userRepository.findOneBy({ id });
 
     if (!user) {
-      throw new NotFoundError("Usuário inexistente.");
+      throw new NotFoundError("Usuário não encontrado!");
     }
 
     return user;

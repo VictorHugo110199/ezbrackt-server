@@ -40,7 +40,6 @@ export class PlayerService {
   async get(id: string): Promise<Player[] | undefined> {
     const competition = await competitionRepository.findOne({ where: { id }, relations: { players: true } });
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return competition?.players;
   }
 }
