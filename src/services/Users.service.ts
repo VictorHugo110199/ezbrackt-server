@@ -62,7 +62,12 @@ export class UserService {
   async update(payload: IUserUpdate, id: string, photo?: string): Promise<IUser> {
     const { email, name, password } = payload;
 
+    const users = await userRepository.findOne({ where: { email: email } });
     const user = await userRepository.findOneBy({ id });
+
+    if (users) {
+      throw new ConflictError("E-mail já está cadastrado!");
+    }
 
     const keys = Object.keys(payload);
 
