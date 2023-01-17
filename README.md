@@ -386,7 +386,7 @@ Exemplo de response em tentativa de deletar outro usuário - status 401
 
 #
 
-### Logar o usuário na plataforma - POST /login
+### 1) Logar o usuário na plataforma - POST /login
 
 ``
 Exemplo de body
