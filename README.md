@@ -488,11 +488,11 @@ Exemplo de response - status 201
 <br>
 
 ``
-Exemplo de response na tentativa de logar com o usuário/senha inválido - status 401
-``
+Exemplo de response caso o usuário não esteja autenticado - status 401
+`` 
 
 ```javascript
 {
-	"message": "Usuário ou senha inválido!"
+	"message": "Token inválido"
 }
 ```
