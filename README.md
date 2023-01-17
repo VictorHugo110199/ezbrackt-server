@@ -331,3 +331,46 @@ Exemplo de response caso o usuário não esteja autenticado - status 401
 	"message": "Token inválido"
 }
 ```
+
+#
+
+### 6) Deletar um usuário - DELETE /users/:id
+Essa rota só pode ser acessada por usuários autenticados (token).
+
+Caso esteja tudo certo, essa rota irá retornar um status 204 (sem conteúdo).
+
+<br>
+
+``
+Exemplo de response caso o usuário não esteja autenticado - status 401
+`` 
+
+```javascript
+{
+	"message": "Token inválido"
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o usuário não seja encontrado ou não exista - status 404
+`` 
+
+```javascript
+{
+	"message": "Usuário não encontrado."
+}
+```
+
+<br>
+
+``
+Exemplo de response em tentativa de deletar outro usuário - status 401
+`` 
+
+```javascript
+{
+	"message": "Não é possível alterar outro usuário."
+}
+```
