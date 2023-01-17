@@ -1,8 +1,8 @@
 import * as yup from "yup";
 
-export class loginSchema {
+export class LoginSchema {
   static login = yup.object().shape({
-    email: yup.string().email().required(),
+    email: yup.string().email().required("Email obrigatório"),
     password: yup.string().required("Senha obrigatória")
   });
 }

@@ -122,7 +122,7 @@ describe("/competitions", () => {
     const id: string = competitions.body[0].id;
     const response = await request(app)
       .patch(`/competitions/${id}`)
-      .send({ name: "Teste de editar" })
+      .send({ name: "Teste de editar", number_players: 4 })
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.statusCode).toBe(401);

@@ -7,6 +7,6 @@ import AppDataSource from "./data-source";
   });
 
   app.listen(3333, () => {
-    console.log("Server listening on port: 3333 http://localhost:3333");
+    console.log("Server listening on: http://localhost:3333");
   });
 })();

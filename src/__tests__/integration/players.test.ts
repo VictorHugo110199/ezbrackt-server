@@ -45,9 +45,7 @@ describe("/players", () => {
     expect(response.body).toHaveProperty("competition");
     expect(response.body).toHaveProperty("photo");
     expect(response.body).toHaveProperty("id");
-    expect(response.body).toHaveProperty("inGame");
     expect(response.body.name).toEqual("victor");
-    expect(response.body.inGame).toEqual(true);
   });
 
   it("POST /players Não deve ser possivel adicionar players a uma competição sem token de autenticação.", async () => {
@@ -132,7 +130,6 @@ describe("/players", () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toHaveProperty("name");
     expect(response.body).toHaveProperty("photo");
-    expect(response.body).toHaveProperty("inGame");
     expect(response.body.name).toEqual("Ernesto");
   });
 

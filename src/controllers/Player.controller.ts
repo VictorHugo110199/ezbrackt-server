@@ -7,17 +7,27 @@ export class PlayerController {
   async create(req: Request, res: Response) {
     const payload: ICreatePlayer = req.body;
     const { id } = req.params;
+    let photo;
 
-    const player = await new PlayerService().create(payload, id);
+    if (req.body.img) {
+      photo = req.body.img.url;
+    }
+
+    const player = await new PlayerService().create(payload, id, photo as string);
 
     return res.status(201).json(player);
   }
 
-  async patch(req: Request, res: Response) {
+  async update(req: Request, res: Response) {
     const payload: IPlayerPatch = req.body;
     const { id } = req.params;
+    let photo;
 
-    const player = await new PlayerService().update(payload, id);
+    if (req.body.img) {
+      photo = req.body.img.url;
+    }
+
+    const player = await new PlayerService().update(payload, id, photo as string);
 
     return res.status(200).json(player);
   }

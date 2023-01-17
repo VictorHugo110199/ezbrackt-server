@@ -5,8 +5,8 @@ import { competitionRepository } from "../repositories/competition.repository";
 import { playerRepository } from "../repositories/player.repository";
 
 export class PlayerService {
-  async create(payload: ICreatePlayer, id: string): Promise<Player> {
-    const { name, photo } = payload;
+  async create(payload: ICreatePlayer, id: string, photo?: string): Promise<Player> {
+    const { name } = payload;
 
     const competition = await competitionRepository.find({ where: { id }, relations: { players: true } });
     const foundCompetition = await competitionRepository.findOneBy({ id });
@@ -26,9 +26,19 @@ export class PlayerService {
     return player;
   }
 
-  async update(payload: IPlayerPatch, id: string): Promise<Player> {
+  async update(payload: IPlayerPatch, id: string, photo?: string): Promise<Player> {
+    const { name } = payload;
+
     const player = await playerRepository.findOneBy({ id });
-    const updatedPlayer = playerRepository.create({ ...player, ...payload });
+
+    if (photo) {
+      const updatedPlayer = playerRepository.create({ ...player, name, photo });
+
+      await playerRepository.save(updatedPlayer);
+      return updatedPlayer;
+    }
+
+    const updatedPlayer = playerRepository.create({ ...player, name });
 
     await playerRepository.save(updatedPlayer);
     return updatedPlayer;
@@ -37,7 +47,6 @@ export class PlayerService {
   async get(id: string): Promise<Player[] | undefined> {
     const competition = await competitionRepository.findOne({ where: { id }, relations: { players: true } });
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return competition?.players;
   }
 }
