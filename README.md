@@ -299,6 +299,12 @@ image: "multipart/form-data"
 ```
 <br>
 
+**Observações:** 
+
+- Caso o usuário decida alterar a senha, deve conter 8 digítos, um caractere maiúsculo, um caractere minúsculo, um número e um caractere especial. 
+
+<br>
+
 ``
 Exemplo de body
 ``
