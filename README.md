@@ -35,8 +35,9 @@ yarn install
 ````
 <br>
 
-**Configure as variáveis de ambiente no seu .env**, passando as credenciais corretas para conectar em seu banco local
+**OBS: Configure as variáveis de ambiente no seu *.env*, passando as credenciais corretas para conectar em seu banco local.**
 
+<br>
 
 Com isso feito, para rodar sua aplicação, basta utilizar o comando
 ````
