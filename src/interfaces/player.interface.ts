@@ -2,7 +2,6 @@ export interface IPlayer {
   name: string;
   photo?: string;
   competition: string;
-  inGame: boolean;
 }
 
 export interface ICreatePlayer {
@@ -13,5 +12,4 @@ export interface ICreatePlayer {
 export interface IPlayerPatch {
   name?: string;
   photo?: string;
-  inGame?: boolean;
 }

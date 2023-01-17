@@ -7,7 +7,7 @@ import { ICreateUser, IUser, IUserLogin, IUserUpdate } from "../interfaces/user.
 import { userRepository } from "../repositories/user.repository";
 
 export class UserService {
-  async create(payload: ICreateUser, photo: string): Promise<IUser> {
+  async create(payload: ICreateUser, photo?: string): Promise<IUser> {
     const { email, isActive, name, password } = payload;
 
     const hashPassword = await bcrypt.hash(password, 10);
@@ -59,24 +59,36 @@ export class UserService {
     return 204;
   }
 
-  async update(payload: IUserUpdate, id: string, photo: string): Promise<IUser> {
+  async update(payload: IUserUpdate, id: string, photo?: string): Promise<IUser> {
     const { email, name, password } = payload;
 
     const user = await userRepository.findOneBy({ id });
 
-    // if (payload.hasOwnProperty("isActive") || payload.hasOwnProperty("id")) {
-    //   throw new UnauthorizedError("Não é possível atualizar os campos: isActive e id");
-    // }
+    const keys = Object.keys(payload);
+
+    if (keys.includes("isActive") || keys.includes("id")) {
+      throw new UnauthorizedError("Não é possível atualizar os campos: isActive e id");
+    }
+
+    if (photo) {
+      const updatedUser = userRepository.create({
+        ...user,
+        email,
+        name,
+        password,
+        photo
+      });
+
+      await userRepository.save(updatedUser);
+      return instanceToInstance(updatedUser);
+    }
 
     const updatedUser = userRepository.create({
       ...user,
       email,
       name,
-      password,
-      photo
+      password
     });
-
-    console.log(updatedUser);
 
     await userRepository.save(updatedUser);
     return instanceToInstance(updatedUser);
