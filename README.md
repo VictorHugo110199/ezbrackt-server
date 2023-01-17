@@ -201,7 +201,7 @@ Exemplo de response caso o usuário não esteja autenticado - status 401
 }
 ```
 
-<br>
+#
 
 ### 3) Listar um usuário pelo ID - GET /users/:id
 Essa rota só pode ser acessada por usuários autenticados (token).
@@ -246,72 +246,87 @@ Exemplo de response caso o usuário não seja encontrado ou não exista - status
 }
 ```
 
-<br>
+#
 
 ### 4) Listar o usuário logado - GET /profile
-Essa rota só pode ser acessada por usuários autenticados.
+Essa rota só pode ser acessada por usuários autenticados (token).
 
 ``
-Exemplo de response - 200
+Exemplo de response - status 200
 `` 
 
-```
+```javascript
 {
-	"id": "a96d9e9f-6b40-4611-b6dd-d064ded7ac9b",
-	"name": "gustavo",
-	"email": "gustavo@email.com",
+	"id": "144183e5-7e7c-467c-87e9-837a1871380c",
+	"name": "Matheus",
+	"email": "matheus@email.com",
 	"photo": null,
 	"isActive": true,
-	"createdAt": "2023-01-12T16:08:21.774Z",
-	"updatedAt": "2023-01-12T16:08:21.774Z"
+	"createdAt": "2023-01-17T17:51:54.495Z",
+	"updatedAt": "2023-01-17T17:51:54.495Z"
 }
 ```
 
+<br>
+
 ``
-Exemplo de response caso o usuário não esteja autenticado - 401
+Exemplo de response caso o usuário não esteja autenticado - status 401
 `` 
-```
+
+```javascript
 {
 	"message": "Token inválido"
 }
 ```
 
-<br>
+#
 
 ### 5) Editar as informações do usuário - PATCH /users/:id
-Essa rota só pode ser acessada por usuários autenticados.
+Essa rota só pode ser acessada por usuários autenticados (token).
+
+Essa rota receberá uma foto em formato de arquivo jpg, jpeg ou png, armazenando a mesma em um banco de dados e convertendo o arquivo para uma URL.
+
+É necessário acrescentar as seguintes configurações no *headers* da requisição:
+
+```javascript
+Content-Type: "application/json",
+image: "multipart/form-data"
+```
+<br>
 
 ``
 Exemplo de body
 ``
 
 ```
-{
-	"name": "Gustavo Ferreira",
-	"email": "gustavoferreira@email.com",
-}
+	name: Gustavo Ferreira
+	email: gustavoferreira@email.com
+	image: perfil.png
 ```
 
 ``
-Exemplo de response - 200
+Exemplo de response - status 200
 `` 
 
 ```
 {
-	"id": "a96d9e9f-6b40-4611-b6dd-d064ded7ac9b",
+	"id": "144183e5-7e7c-467c-87e9-837a1871380c",
 	"name": "Gustavo Ferreira",
 	"email": "gustavoferreira@email.com",
-	"photo": null,
+	"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673982104/xnjz65laze21axzbldhb.jpg",
 	"isActive": true,
-	"createdAt": "2023-01-12T16:08:21.774Z",
-	"updatedAt": "2023-01-16T16:08:21.774Z"
+	"createdAt": "2023-01-17T17:51:54.495Z",
+	"updatedAt": "2023-01-17T19:01:45.068Z"
 }
 ```
 
+<br>
+
 ``
-Exemplo de response caso o usuário não esteja autenticado - 401
+Exemplo de response caso o usuário não esteja autenticado - status 401
 `` 
-```
+
+```javascript
 {
 	"message": "Token inválido"
 }
