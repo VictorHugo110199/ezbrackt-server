@@ -107,6 +107,13 @@ image: "multipart/form-data"
 
 <br>
 
+**Observações:** 
+
+- Ao criar o cadastro, o campo de foto é opcional. Caso o usuário opte por não enviar, o valor retornado será null.
+- A senha deve conter 8 digítos, um caractere maiúsculo, um caractere minúsculo, um número e um caractere especial. 
+
+<br>
+
 ``
 Exemplo de body
 ``
@@ -133,8 +140,6 @@ Exemplo de response - status 201
 	"updatedAt": "2023-01-17T18:42:31.469Z"
 }
 ```
-
-**OBS: Ao criar o cadastro, o campo de foto é opcional. Caso o usuário opte por não enviar, o valor retornado será null.** 
 
 <br>
 
@@ -372,5 +377,122 @@ Exemplo de response em tentativa de deletar outro usuário - status 401
 ```javascript
 {
 	"message": "Não é possível alterar outro usuário."
+}
+```
+
+<br>
+
+#
+
+### Rota de login
+
+#
+
+### Logar o usuário na plataforma - POST /login
+
+``
+Exemplo de body
+``
+
+```javascript
+{
+	"email":"pedro@email.com",
+	"password":"Teste123@"
+}
+```
+
+``
+Exemplo de response - status 200
+``
+
+```javascript
+{
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY3OTU3MGI1LTg0MDktNDIxNC05NzY3LTc1ZWFjYWQ0ZDJmYyIsImlhdCI6MTY3Mzk4NTg4MywiZXhwIjoxNjc0MDcyMjgzLCJzdWIiOiJkZXZtYXRoZXVzQGVtYWlsLmNvbSJ9.M078jIl7NpsZI9tag4X_dCj7CKdoSobCD8toWkGgycY"
+}
+```
+
+<br>
+
+``
+Exemplo de response na tentativa de logar com um usuário inativo - status 400
+``
+
+```javascript
+{
+	"message": "Usuário inativo!"
+}
+```
+
+<br>
+
+``
+Exemplo de response na tentativa de logar com o usuário/senha inválido - status 401
+``
+
+```javascript
+{
+	"message": "Usuário ou senha inválido!"
+}
+```
+
+<br>
+
+#
+
+### Rotas de Campeonato
+
+#
+
+### 1) Criação do campeonato - POST /competitions
+Essa rota só pode ser acessada por usuários autenticados (token).
+
+``
+Exemplo de body
+``
+
+```javascript
+{
+	"name":"Campeonato de Teste",
+	"number_players": 4,
+	"description":"Aqui vem a descrição!"
+}
+```
+
+``
+Exemplo de response - status 201
+``
+
+```javascript
+{
+	"name": "Campeonato de Teste",
+	"number_players": 4,
+	"description": "Aqui vem a descrição!",
+	"user": {
+		"id": "36d57704-69e0-4fe7-89ee-0f46f8f0fefc",
+		"name": "Matheus",
+		"email": "matheusteste@email.com",
+		"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979000/iq3iyw2znpvuro1fn7kr.jpg",
+		"isActive": true,
+		"createdAt": "2023-01-17T18:10:01.181Z",
+		"updatedAt": "2023-01-17T18:10:01.181Z"
+	},
+	"winner": null,
+	"id": "a3896bed-7b24-401c-95bf-669898b2059c",
+	"status": true,
+	"createdAt": "2023-01-17T18:11:22.909Z",
+	"updatedAt": "2023-01-17T18:11:22.909Z",
+	"isActive": true
+}
+```
+
+<br>
+
+``
+Exemplo de response na tentativa de logar com o usuário/senha inválido - status 401
+``
+
+```javascript
+{
+	"message": "Usuário ou senha inválido!"
 }
 ```
