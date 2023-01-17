@@ -4,7 +4,7 @@
 
 ## ✅ Links da aplicação
 - URL de teste: http://localhost:3333
-- URL de produção: https://ezbracket2.onrender.com/
+- URL de produção: https://ezbracket2.onrender.com
 
 <br/>
 
