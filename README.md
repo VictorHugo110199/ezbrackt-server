@@ -158,6 +158,8 @@ Exemplo de response com e-mail já existente - status 409
 ### 2) Listar todos os usuários - GET /users
 Essa rota só pode ser acessada por usuários autenticados (token).
 
+<br>
+
 ``
 Exemplo de response - status 200
 `` 
@@ -211,6 +213,8 @@ Exemplo de response caso o usuário não esteja autenticado - status 401
 ### 3) Listar um usuário pelo ID - GET /users/:id
 Essa rota só pode ser acessada por usuários autenticados (token).
 
+<br>
+
 ``
 Exemplo de response - status 200
 `` 
@@ -255,6 +259,8 @@ Exemplo de response caso o usuário não seja encontrado ou não exista - status
 
 ### 4) Listar o usuário logado - GET /profile
 Essa rota só pode ser acessada por usuários autenticados (token).
+
+<br>
 
 ``
 Exemplo de response - status 200
@@ -390,6 +396,8 @@ Exemplo de response em tentativa de deletar outro usuário - status 401
 
 ### Logar o usuário na plataforma - POST /login
 
+<br>
+
 ``
 Exemplo de body
 ``
@@ -445,6 +453,8 @@ Exemplo de response na tentativa de logar com o usuário/senha inválido - statu
 
 ### 1) Criação do campeonato - POST /competitions
 Essa rota só pode ser acessada por usuários autenticados (token).
+
+<br>
 
 ``
 Exemplo de body
