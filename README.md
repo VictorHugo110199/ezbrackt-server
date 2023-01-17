@@ -114,35 +114,48 @@ Após rodar um dos comandos aparecerá um log no seu terminal, contendo as infor
 ## ➡️ **Rotas da aplicação**
 ### Rotas do usuário
 
-#### 1) Criação do usuário - POST /users
+### 1) Criação do usuário - POST /users
+Essa rota receberá uma foto em formato de arquivo jpg, jpeg ou png, armazenando a mesma em um banco de dados e convertendo o arquivo para uma URL.
+
+É necessário acrescentar as seguintes configurações no *headers* da requisição:
+
+```javascript
+Content-Type: "application/json",
+image: "multipart/form-data"
+```
+
+<br>
 
 ``
 Exemplo de body
 ``
 
 ```
-{
-    "name": "Matheus",
-    "email": "devmatheus@email.com",
-    "password": "Teste123@"
-}
+    name: Matheus
+    email: devmatheus@email.com
+    password: Teste123@
+    image: perfil.jpg
 ```
 
 ``
-Exemplo de response - 201
+Exemplo de response - status 201
 `` 
 
-```
+```javascript
 {
 	"name": "Matheus",
 	"email": "devmatheus@email.com",
-	"photo": null,
-	"id": "d355d8cf-db7a-49db-9e8c-be6098e901d8",
+	"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673980950/fzexxndzvioavmpqexxp.jpg",
+	"id": "f79570b5-8409-4214-9767-75eacad4d2fc",
 	"isActive": true,
-	"createdAt": "2023-01-16T18:03:53.434Z",
-	"updatedAt": "2023-01-16T18:03:53.434Z"
+	"createdAt": "2023-01-17T18:42:31.469Z",
+	"updatedAt": "2023-01-17T18:42:31.469Z"
 }
 ```
+
+**OBS: Ao criar o cadastro, o campo de foto é opcional. Caso o usuário opte por não enviar, o valor retornado será null.** 
+
+<br>
 
 ``
 Exemplo de response com e-mail já existente - 409
@@ -156,7 +169,7 @@ Exemplo de response com e-mail já existente - 409
 
 <br>
 
-#### 2) Listar todos os usuários - GET /users
+### 2) Listar todos os usuários - GET /users
 Essa rota só pode ser acessada por usuários autenticados.
 
 ``
@@ -206,7 +219,7 @@ Exemplo de response caso o usuário não esteja autenticado - 401
 
 <br>
 
-#### 3) Listar um usuário pelo ID - GET /users/:id
+### 3) Listar um usuário pelo ID - GET /users/:id
 Essa rota só pode ser acessada por usuários autenticados.
 
 ``
@@ -245,7 +258,7 @@ Exemplo de response caso o usuário não seja encontrado ou não exista - 404
 
 <br>
 
-#### 4) Listar o usuário logado - GET /profile
+### 4) Listar o usuário logado - GET /profile
 Essa rota só pode ser acessada por usuários autenticados.
 
 ``
@@ -275,7 +288,7 @@ Exemplo de response caso o usuário não esteja autenticado - 401
 
 <br>
 
-#### 5) Editar as informações do usuário - PATCH /users/:id
+### 5) Editar as informações do usuário - PATCH /users/:id
 Essa rota só pode ser acessada por usuários autenticados.
 
 ``
