@@ -141,7 +141,7 @@ Exemplo de response - status 201
 Exemplo de response com e-mail já existente - status 409
 ``
 
-```
+```javascript
 {
 	"message": "E-mail já cadastrado!"
 }
@@ -187,12 +187,14 @@ Exemplo de response - status 200
 	}
 ]
 ```
+
 <br>
 
 ``
 Exemplo de response caso o usuário não esteja autenticado - status 401
 `` 
-```
+
+```javascript
 {
 	"message": "Token inválido"
 }
@@ -201,37 +203,43 @@ Exemplo de response caso o usuário não esteja autenticado - status 401
 <br>
 
 ### 3) Listar um usuário pelo ID - GET /users/:id
-Essa rota só pode ser acessada por usuários autenticados.
+Essa rota só pode ser acessada por usuários autenticados (token).
 
 ``
-Exemplo de response - 200
+Exemplo de response - status 200
 `` 
 
-```
+```javascript
 {
-	"id": "d355d8cf-db7a-49db-9e8c-be6098e901d8",
+	"id": "80daa530-6b30-48f4-8fec-a8c31dc07c27",
 	"name": "Matheus",
-	"email": "devmatheus@email.com",
-	"photo": null,
+	"email": "matheus123@email.com",
+	"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673978447/ar7coempzfsm4ah6rgzf.jpg",
 	"isActive": true,
-	"createdAt": "2023-01-16T18:03:53.434Z",
-	"updatedAt": "2023-01-16T18:03:53.434Z"
+	"createdAt": "2023-01-17T17:56:49.075Z",
+	"updatedAt": "2023-01-17T18:00:48.050Z"
 }
 ```
 
+<br>
+
 ``
-Exemplo de response caso o usuário não esteja autenticado - 401
+Exemplo de response caso o usuário não esteja autenticado - status 401
 `` 
-```
+
+```javascript
 {
 	"message": "Token inválido"
 }
 ```
 
+<br>
+
 ``
-Exemplo de response caso o usuário não seja encontrado ou não exista - 404
+Exemplo de response caso o usuário não seja encontrado ou não exista - status 404
 `` 
-```
+
+```javascript
 {
 	"message": "Usuário não encontrado."
 }
