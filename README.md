@@ -308,7 +308,7 @@ Exemplo de body
 Exemplo de response - status 200
 `` 
 
-```
+```javascript
 {
 	"id": "144183e5-7e7c-467c-87e9-837a1871380c",
 	"name": "Gustavo Ferreira",
