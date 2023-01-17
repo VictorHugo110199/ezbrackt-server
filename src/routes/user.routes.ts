@@ -15,7 +15,14 @@ const dataMiddleware = new DataMiddleware();
 
 export const userRoutes = Router();
 
-userRoutes.post("/", uploadImage, cloudinaryFunction, dataMiddleware.ensureData(userSchemas.create), userMiddleware.emailExists, userController.create);
+userRoutes.post(
+  "/",
+  uploadImage,
+  cloudinaryFunction,
+  dataMiddleware.ensureData(userSchemas.create),
+  userMiddleware.emailExists,
+  userController.create
+);
 
 userRoutes.get("/", userMiddleware.tokenExists, userController.getUsers);
 
@@ -23,6 +30,9 @@ userRoutes.get("/:id", userMiddleware.tokenExists, userController.getUsersBysId)
 
 userRoutes.patch(
   "/:id",
+  uploadImage,
+  cloudinaryFunction,
+  dataMiddleware.ensureData(userSchemas.update),
   userMiddleware.tokenExists,
   userMiddleware.verifyUser,
   userMiddleware.verifyUserLogged,

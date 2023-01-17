@@ -59,17 +59,24 @@ export class UserService {
     return 204;
   }
 
-  async update(payload: IUserUpdate, id: string): Promise<IUser> {
+  async update(payload: IUserUpdate, id: string, photo: string): Promise<IUser> {
+    const { email, name, password } = payload;
+
     const user = await userRepository.findOneBy({ id });
 
-    if (payload.hasOwnProperty("isActive") || payload.hasOwnProperty("id")) {
-      throw new UnauthorizedError("Não é possível atualizar os campos: isActive e id");
-    }
+    // if (payload.hasOwnProperty("isActive") || payload.hasOwnProperty("id")) {
+    //   throw new UnauthorizedError("Não é possível atualizar os campos: isActive e id");
+    // }
 
     const updatedUser = userRepository.create({
       ...user,
-      ...payload
+      email,
+      name,
+      password,
+      photo
     });
+
+    console.log(updatedUser);
 
     await userRepository.save(updatedUser);
     return instanceToInstance(updatedUser);

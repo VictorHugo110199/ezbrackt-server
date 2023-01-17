@@ -30,7 +30,9 @@ export class UserController {
   async update(req: Request, res: Response) {
     const payload: IUserUpdate = req.body;
     const { id } = req.user;
-    const data = await new UserService().update(payload, id);
+    const photo: string = req.body.img.url;
+
+    const data = await new UserService().update(payload, id, photo);
 
     return res.status(200).json(data);
   }
