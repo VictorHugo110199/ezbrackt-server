@@ -886,3 +886,81 @@ Exemplo de response caso o campeonato já tenha atingido o número máximo de us
 	"message": "Esse campeonato já atingiu o número máximo de players"
 }
 ```
+
+#
+
+### 2) Listar os players de um campeonato - GET /competitions/:id/players
+Essa rota só pode ser acessada por usuários autenticados (token).
+
+``
+Exemplo de response - status 200
+``
+
+```javascript
+[
+	{
+		"id": "1a54933a-47e7-426d-9c9f-138e8f6c675e",
+		"name": "Matheus",
+		"photo": null
+	},
+	{
+		"id": "ffeb57ca-e4f0-4377-8839-81f4d682be92",
+		"name": "Victor",
+		"photo": null
+	},
+	{
+		"id": "a0889fee-2b62-4f12-b49a-250fd3ea94dd",
+		"name": "Ayrton",
+		"photo": null
+	},
+	{
+		"id": "28400533-44d1-470d-b6b3-31fe7dcaaaf8",
+		"name": "Fred",
+		"photo": null
+	},
+	{
+		"id": "ae8c1697-6e49-4181-8909-e8c2bc71a7d9",
+		"name": "Gustavo",
+		"photo": null
+	},
+	{
+		"id": "1868d14e-9376-4918-a358-935f81d0c3f2",
+		"name": "Pedro",
+		"photo": null
+	},
+	{
+		"id": "a2fc8fca-264c-45bb-977f-a5cdf8d40df7",
+		"name": "Enrico",
+		"photo": null
+	},
+	{
+		"id": "9e149084-ab4b-427d-8045-c401e0d532a8",
+		"name": "Jardel",
+		"photo": null
+	}
+]
+```
+
+<br>
+
+``
+Exemplo de response caso o usuário não esteja autenticado - status 401
+`` 
+
+```javascript
+{
+	"message": "Token inválido"
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o campeonato não seja encontrado ou não exista - status 404
+`` 
+
+```javascript
+{
+	"message": "Competição não encontrada."
+}
+```
