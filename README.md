@@ -628,3 +628,94 @@ Exemplo de response - status 200
 	}
 ]
 ```
+
+<br>
+
+``
+Exemplo de response caso o usuário não esteja autenticado - status 401
+`` 
+
+```javascript
+{
+	"message": "Token inválido"
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o usuário não seja encontrado ou não exista - status 404
+`` 
+
+```javascript
+{
+	"message": "Usuário não encontrado."
+}
+```
+
+#
+
+### 4) Editar um campeonato - PATCH /competitions/:id
+Essa rota só pode ser acessada por usuários autenticados (token).
+
+``
+Exemplo de body
+``
+
+```javascript
+{
+	
+	"description": "Testando uma nova descrição!"
+}
+```
+
+``
+Exemplo de response - status 200
+``
+
+```javascript
+{
+	"id": "5c230b92-6adf-475e-aecd-0e4873f0599a",
+	"name": "Campeonato de Teste",
+	"status": true,
+	"winner": null,
+	"number_players": 4,
+	"description": "Testando uma nova descrição!",
+	"createdAt": "2023-01-17T18:10:13.754Z",
+	"updatedAt": "2023-01-17T18:10:39.502Z",
+	"isActive": true,
+	"user": {
+		"id": "36d57704-69e0-4fe7-89ee-0f46f8f0fefc",
+		"name": "Matheus",
+		"email": "matheusteste@email.com",
+		"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979000/iq3iyw2znpvuro1fn7kr.jpg",
+		"isActive": true,
+		"createdAt": "2023-01-17T18:10:01.181Z",
+		"updatedAt": "2023-01-17T18:10:01.181Z"
+	}
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o usuário não esteja autenticado - status 401
+`` 
+
+```javascript
+{
+	"message": "Token inválido"
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o campeonato não seja encontrado ou não exista - status 404
+`` 
+
+```javascript
+{
+	"message": "Competição não encontrada."
+}
+```
