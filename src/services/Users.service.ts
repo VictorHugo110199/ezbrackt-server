@@ -59,10 +59,24 @@ export class UserService {
     return 204;
   }
 
-  async update(payload: IUserUpdate, id: string, photo?: string): Promise<IUser> {
+  async update(payload: IUserUpdate, id: string, photo?: string): Promise<IUser | null> {
     const { email, name, password } = payload;
+    let hashPassword;
+
+    const users = await userRepository
+      .createQueryBuilder("users")
+      .where("users.email = :email", { email: email })
+      .getExists();
+
+    if (users) {
+      throw new ConflictError("E-mail já cadastrado!");
+    }
 
     const user = await userRepository.findOneBy({ id });
+
+    if (password) {
+      hashPassword = bcrypt.hashSync(password, 10);
+    }
 
     const keys = Object.keys(payload);
 
@@ -71,26 +85,26 @@ export class UserService {
     }
 
     if (photo) {
-      const updatedUser = userRepository.create({
+      await userRepository.update(id, {
         ...user,
         email,
         name,
-        password,
+        password: hashPassword,
         photo
       });
 
-      await userRepository.save(updatedUser);
+      const updatedUser = userRepository.findOneBy({ id });
       return instanceToInstance(updatedUser);
     }
 
-    const updatedUser = userRepository.create({
+    await userRepository.update(id, {
       ...user,
       email,
       name,
-      password
+      password: hashPassword
     });
 
-    await userRepository.save(updatedUser);
+    const updatedUser = userRepository.findOneBy({ id });
     return instanceToInstance(updatedUser);
   }
 

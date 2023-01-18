@@ -27,9 +27,12 @@ export class BracketsStartedService {
           const bracket = bracketRepository.create({
             competition: { id: idCompetition },
             player1: { ...playerSort[i] },
-            player2: { ...playerSort[i + 1] },
-            currentRound: playerSort.length / 2
+            currentRound: Math.ceil(playerSort.length / 2)
           });
+
+          if (playerSort[i + 1]) {
+            bracket.player2 = playerSort[i + 1];
+          }
           await bracketRepository.save(bracket);
         }
       }
@@ -74,8 +77,9 @@ export class BracketsStartedService {
       if (playerWinner) {
         bracket.winner = playerWinner;
       }
-
-      if (winner === bracket.player1.id) {
+      if (bracket.player2 == null) {
+        bracket.loser = null;
+      } else if (winner === bracket.player1.id) {
         const playerLoser = await playerRepository.findOneBy({
           id: bracket.player2.id
         });
@@ -123,7 +127,7 @@ export class BracketsStartedService {
 
     let finishBracket = true;
     const playersWinner: any[] = [];
-    let currentRound = 10;
+    let currentRound = 99;
 
     competitionBracket?.bracket.map((bracket) => {
       if (currentRound > bracket.currentRound) {
@@ -142,15 +146,36 @@ export class BracketsStartedService {
 
     if (finishBracket) {
       if (playersWinner.length >= 2) {
-        for (let i = 0; i < playersWinner.length; i += 2) {
-          const bracket = bracketRepository.create({
-            competition: { id: idCompetition },
-            player1: { ...playersWinner[i] },
-            player2: { ...playersWinner[i + 1] },
-            currentRound: playersWinner.length / 2
-          });
+        const orderswitching = 0 > Math.random() - 0.5;
+        console.log(orderswitching);
+        if (orderswitching) {
+          for (let i = 0; i < playersWinner.length; i += 2) {
+            const bracket = bracketRepository.create({
+              competition: { id: idCompetition },
+              player1: { ...playersWinner[i] },
+              currentRound: Math.ceil(playersWinner.length / 2)
+            });
 
-          await bracketRepository.save(bracket);
+            if (playersWinner[i + 1]) {
+              bracket.player2 = playersWinner[i + 1];
+            }
+
+            await bracketRepository.save(bracket);
+          }
+        } else {
+          for (let i = playersWinner.length - 1; i >= 0; i -= 2) {
+            const bracket = bracketRepository.create({
+              competition: { id: idCompetition },
+              player1: { ...playersWinner[i] },
+              currentRound: Math.ceil(playersWinner.length / 2)
+            });
+
+            if (playersWinner[i - 1]) {
+              bracket.player2 = playersWinner[i - 1];
+            }
+
+            await bracketRepository.save(bracket);
+          }
         }
       }
     }

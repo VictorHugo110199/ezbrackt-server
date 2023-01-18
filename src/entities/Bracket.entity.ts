@@ -20,7 +20,7 @@ export class Brackets {
 
   @ManyToOne(() => Player, (player) => player.id)
   @JoinColumn()
-  loser: Player;
+  loser: Player | null;
 
   @ManyToOne(() => Competitions, (competition) => competition.bracket)
   competition: Competitions;
