@@ -16,6 +16,7 @@
 	- Rotas do campeonato
 	- Rotas do player
 	- Rotas do chaveamento
+5) Desenvolvedores responsáveis
 
 
 <br>
@@ -1363,3 +1364,107 @@ Exemplo de response caso o chaveamento inicial ainda não tenha sido criado - st
 	"message": "O chaveamento ainda não foi criado!"
 }
 ```
+
+<br/>
+
+<h1 align="center">👥 Desenvolvedores responsáveis</h1> 
+
+<table align="center">
+  <tr>
+        <td align="center">
+        <img src="https://media.licdn.com/dms/image/C4D03AQFebRQHqQaWxw/profile-displayphoto-shrink_800_800/0/1578356668381?e=1679529600&v=beta&t=BkqeyKBrnPZ26qGVCIK3weHMwFgdAXee8qiwKYnvHUw" width="100px;" alt="Foto do Fred"/><br>          
+        <sub>
+          <b>Frederico Almeida</b>  <br/>
+          <b>Scrum Master</b> <br/>
+           <div align="center">
+            <a href="https://github.com/almeidafrederico" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"/>
+           </div>
+            <div align="center">
+                <a href="https://www.linkedin.com/in/almeidaafrederico/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"/>
+            </div>
+        </sub>
+    </td> 
+    <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/102761014?v=4" width="100px;" alt="Foto do Matheus"/><br>        
+        <sub>
+          <b>Matheus Felipe</b> <br/>
+          <b>Tech Lead</b> <br/>
+          <div align="center">
+            <a href="https://github.com/matheusfelipetp" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"/>
+          </div>
+           <div align="center">
+            <a href="https://www.linkedin.com/in/matheusfelipetp/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"/>
+           </div>
+        </sub>
+    </td>
+    <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/106685596?v=4" width="100px;" alt="Foto do Pedro"/><br>        
+        <sub>
+          <b>Pedro Silva</b> <br/>
+          <b>Product Owner</b> <br/>
+           <div align="center">
+            <a href="https://github.com/Pedrosilvacwb" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"/>
+           </div>
+            <div align="center">
+              <a href="https://www.linkedin.com/in/pedrosilvacwb/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"/>
+             </div>
+        </sub>
+    </td>
+     <td align="center">
+        <img src="https://pps.whatsapp.net/v/t61.24694-24/118824223_173753290990422_8774592077882010571_n.jpg?ccb=11-4&oh=01_AdSB8ciuqkI8u20vp4uT1MIozcx3idV-UlRnYl2EhTuuZw&oe=63D4A61A" width="100px;" alt="Foto do Gustavo"/><br>        
+        <sub>
+            <b>Gustavo Ferreira</b> <br/>
+            <b>Dev</b> <br/>
+             <div align="center">
+            <a href="https://github.com/guferreira1" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"/>
+            </div>
+            <div align="center">
+                <a href="https://www.linkedin.com/in/gus-ferreira/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"/>
+            </div>
+        </sub>
+    </td>   
+      <td align="center">
+        <img src="https://media.licdn.com/dms/image/C5603AQEuHFmQVdW6dA/profile-displayphoto-shrink_800_800/0/1653584673425?e=1679529600&v=beta&t=pQNg-wQuNhfovUPGwH7WlADUp1BQls_l9kArPtw_QDQ" width="100px;" alt="Foto do Ayrton"/><br>          
+        <sub>
+          <b>Ayrton Hideo</b>  <br/>
+          <b>Dev</b> <br/>
+           <div align="center">
+            <a href="https://github.com/hideo651" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"/>
+            </div>
+             <div align="center">
+                <a href="https://www.linkedin.com/in/ayrton-hideo-hirata-29aa4367/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"/>
+             </div>
+        </sub>
+    </td> 
+  </tr>
+</table>
+<table align="center">
+  <tr>
+    <td align="center">
+        <img src="https://avatars.githubusercontent.com/u/106822915?v=4" width="100px;" alt="Foto do Enrico"/><br>          
+        <sub>
+          <b>Enrico Vieira</b>  <br/>
+            <b>Dev</b> <br/>
+             <div align="center">
+            <a href="https://github.com/enricovieira" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"/>
+            </div>
+             <div align="center">
+                <a href="https://www.linkedin.com/in/enricovieira/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"/>
+             </div>
+        </sub>
+    </td>    
+    <td align="center">
+        <img src="https://pps.whatsapp.net/v/t61.24694-24/306644115_1172256033388510_7570431730471049903_n.jpg?ccb=11-4&oh=01_AdTaozxJ1cX3GslH3rwaFvn-rLbftEmfDQujF9-Jm5UjDQ&oe=63D48E4D" width="100px;" alt="Foto do Victor"/><br>          
+        <sub>
+          <b>Victor Silva</b>  <br/>
+          <b>Dev</b> <br/>
+          <div align="center">
+            <a href="https://github.com/VictorHugo110199" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"/>
+          </div>
+          <div align="center">
+            <a href="https://www.linkedin.com/in/victor-hugo-santos-silva-b5ab7a144/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"/>
+           </div> 
+        </sub>
+    </td> 
+  </tr>
+</table>
