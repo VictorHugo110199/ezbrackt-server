@@ -348,6 +348,8 @@ Exemplo de response caso o usuário não esteja autenticado - status 401
 ### 6) Deletar um usuário - DELETE /users/:id
 Essa rota só pode ser acessada por usuários autenticados (token).
 
+Essa rota irá alterar a propriedade *isActive* do usuário para falso, realizando um soft delete e tornando inativa a conta. 
+
 Caso esteja tudo certo, essa rota irá retornar um status 204 (sem conteúdo).
 
 ``
@@ -697,6 +699,49 @@ Exemplo de response - status 200
 ```
 
 <br>
+
+``
+Exemplo de response caso o usuário não esteja autenticado - status 401
+`` 
+
+```javascript
+{
+	"message": "Token inválido"
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o campeonato não seja encontrado ou não exista - status 404
+`` 
+
+```javascript
+{
+	"message": "Competição não encontrada."
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o campeonato não tenha sido criado pelo usuário logado - status 401
+`` 
+
+```javascript
+{
+	"message": "Campeonato inválido."
+}
+```
+
+#
+
+### 5) Deletar um campeonato - DELETE /competitions/:id
+Essa rota só pode ser acessada por usuários autenticados (token).
+
+Essa rota irá alterar a propriedade *isActive* do campeonato para falso, realizando um soft delete e tornando-o inativo.
+
+Caso esteja tudo certo, essa rota irá retornar um status 204 (sem conteúdo).
 
 ``
 Exemplo de response caso o usuário não esteja autenticado - status 401
