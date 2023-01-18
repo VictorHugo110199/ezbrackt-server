@@ -1,3 +1,4 @@
+import { hashSync } from "bcrypt";
 import * as yup from "yup";
 
 export class UserSchemas {

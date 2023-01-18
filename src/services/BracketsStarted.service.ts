@@ -125,14 +125,12 @@ export class BracketsStartedService {
     const playersWinner: any[] = [];
     let currentRound = 10;
 
-    // eslint-disable-next-line array-callback-return
     competitionBracket?.bracket.map((bracket) => {
       if (currentRound > bracket.currentRound) {
         currentRound = bracket.currentRound;
       }
     });
 
-    // eslint-disable-next-line array-callback-return
     competitionBracket?.bracket.map((bracket) => {
       if (!bracket.winner) {
         finishBracket = false;

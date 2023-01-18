@@ -15,11 +15,16 @@ const competitionMiddleware = new CompetitionMiddleware();
 const playerController = new PlayerController();
 const dataMiddleware = new DataMiddleware();
 const playerSchema = PlayerSchema;
-const competitionSchema = CompetitionSchema
+const competitionSchema = CompetitionSchema;
 
 export const competitionRoutes = Router();
 
-competitionRoutes.post("/", userMiddleware.tokenExists, dataMiddleware.ensureData(competitionSchema.create),competitionController.create);
+competitionRoutes.post(
+  "/",
+  userMiddleware.tokenExists,
+  dataMiddleware.ensureData(competitionSchema.create),
+  competitionController.create
+);
 
 competitionRoutes.get("/", userMiddleware.tokenExists, competitionController.getCompetitions);
 
@@ -27,8 +32,8 @@ competitionRoutes.patch(
   "/:id",
   userMiddleware.tokenExists,
   competitionMiddleware.idExists,
-  dataMiddleware.ensureData(competitionSchema.create),
   competitionMiddleware.idValid,
+  dataMiddleware.ensureData(competitionSchema.update),
   competitionController.update
 );
 

@@ -7,7 +7,7 @@ import { ICreateUser, IUser, IUserLogin, IUserUpdate } from "../interfaces/user.
 import { userRepository } from "../repositories/user.repository";
 
 export class UserService {
-  async create(payload: ICreateUser, photo: string): Promise<IUser> {
+  async create(payload: ICreateUser, photo?: string): Promise<IUser> {
     const { email, isActive, name, password } = payload;
 
     const hashPassword = await bcrypt.hash(password, 10);
@@ -59,26 +59,52 @@ export class UserService {
     return 204;
   }
 
-  async update(payload: IUserUpdate, id: string, photo: string): Promise<IUser> {
+  async update(payload: IUserUpdate, id: string, photo?: string): Promise<IUser | null> {
     const { email, name, password } = payload;
+    let hashPassword;
+
+    const users = await userRepository
+      .createQueryBuilder("users")
+      .where("users.email = :email", { email: email })
+      .getExists();
+
+    if (users) {
+      throw new ConflictError("E-mail já cadastrado!");
+    }
 
     const user = await userRepository.findOneBy({ id });
 
-    // if (payload.hasOwnProperty("isActive") || payload.hasOwnProperty("id")) {
-    //   throw new UnauthorizedError("Não é possível atualizar os campos: isActive e id");
-    // }
+    if (password) {
+      hashPassword = bcrypt.hashSync(password, 10);
+    }
 
-    const updatedUser = userRepository.create({
+    const keys = Object.keys(payload);
+
+    if (keys.includes("isActive") || keys.includes("id")) {
+      throw new UnauthorizedError("Não é possível atualizar os campos: isActive e id");
+    }
+
+    if (photo) {
+      await userRepository.update(id, {
+        ...user,
+        email,
+        name,
+        password: hashPassword,
+        photo
+      });
+
+      const updatedUser = userRepository.findOneBy({ id });
+      return instanceToInstance(updatedUser);
+    }
+
+    await userRepository.update(id, {
       ...user,
       email,
       name,
-      password,
-      photo
+      password: hashPassword
     });
 
-    console.log(updatedUser);
-
-    await userRepository.save(updatedUser);
+    const updatedUser = userRepository.findOneBy({ id });
     return instanceToInstance(updatedUser);
   }
 

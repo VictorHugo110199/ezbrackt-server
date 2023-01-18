@@ -11,8 +11,8 @@ export const playerRoutes = Router();
 const playerController = new PlayerController();
 const userMiddleware = new UserMiddleware();
 const playerMiddleware = new PlayerMiddleware();
-const dataMiddleware = new DataMiddleware()
-const playerSchema = PlayerSchema
+const dataMiddleware = new DataMiddleware();
+const playerSchema = PlayerSchema;
 
 playerRoutes.patch(
   "/:id",
@@ -22,5 +22,5 @@ playerRoutes.patch(
   playerMiddleware.idExist,
   dataMiddleware.ensureData(playerSchema.update),
   playerMiddleware.ensurePlayerOwnerCompetition,
-  playerController.patch
+  playerController.update
 );

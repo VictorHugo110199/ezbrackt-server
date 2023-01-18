@@ -83,13 +83,11 @@ describe("/brackets", () => {
     const bracketId: string = bracket.body.bracket[0].id;
 
     const winner = bracket.body.bracket[0].player1;
-    console.log(winner);
+
     const response = await request(app)
       .post(`/brackets/winner/${bracketId}`)
       .send({ winner: winner.id })
       .set("Authorization", `Bearer ${token}`);
-
-    console.log("Response", response.body);
 
     expect(response.statusCode).toBe(201);
     expect(response.body).toHaveProperty("id");
