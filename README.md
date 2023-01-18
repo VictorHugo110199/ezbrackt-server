@@ -500,3 +500,131 @@ Exemplo de response caso o usuário não esteja autenticado - status 401
 	"message": "Token inválido"
 }
 ```
+
+#
+
+### 2) Listar todos os campeonatos da plataforma - GET /competitions
+Essa rota só pode ser acessada por usuários autenticados (token).
+
+``
+Exemplo de response - status 200
+``
+
+```javascript
+[
+	{
+		"id": "95247976-fb72-41b7-8f6f-217a924d1b4d",
+		"name": "Campeonato de Teste",
+		"status": true,
+		"winner": null,
+		"number_players": 4,
+		"description": "Aqui vem a descrição!",
+		"createdAt": "2023-01-18T00:13:58.444Z",
+		"updatedAt": "2023-01-18T00:13:58.444Z",
+		"isActive": true,
+		"user": {
+			"id": "f79570b5-8409-4214-9767-75eacad4d2fc",
+			"name": "Matheus",
+			"email": "devmatheus@email.com",
+			"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673980950/fzexxndzvioavmpqexxp.jpg",
+			"isActive": true,
+			"createdAt": "2023-01-17T18:42:31.469Z",
+			"updatedAt": "2023-01-17T18:42:31.469Z"
+		},
+		"players": [],
+		"bracket": []
+	},
+	{
+		"id": "b096be51-caca-47ae-9e54-2445f0a4afe8",
+		"name": "Campeonato de Teste 2",
+		"status": true,
+		"winner": null,
+		"number_players": 8,
+		"description": "Aqui vem a descrição!",
+		"createdAt": "2023-01-18T00:14:13.194Z",
+		"updatedAt": "2023-01-18T00:14:13.194Z",
+		"isActive": true,
+		"user": {
+			"id": "f79570b5-8409-4214-9767-75eacad4d2fc",
+			"name": "Matheus",
+			"email": "devmatheus@email.com",
+			"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673980950/fzexxndzvioavmpqexxp.jpg",
+			"isActive": true,
+			"createdAt": "2023-01-17T18:42:31.469Z",
+			"updatedAt": "2023-01-17T18:42:31.469Z"
+		},
+		"players": [],
+		"bracket": []
+	}
+]
+```
+
+<br>
+
+``
+Exemplo de response caso o usuário não esteja autenticado - status 401
+`` 
+
+```javascript
+{
+	"message": "Token inválido"
+}
+```
+
+#
+
+### 3) Listar todos os campeonatos de um usuário - GET /users/:idUser/competitions
+Essa rota só pode ser acessada por usuários autenticados (token).
+
+``
+Exemplo de response - status 200
+``
+
+```javascript
+[
+	{
+		"id": "95247976-fb72-41b7-8f6f-217a924d1b4d",
+		"name": "Campeonato de Teste",
+		"status": true,
+		"winner": null,
+		"number_players": 4,
+		"description": "Aqui vem a descrição!",
+		"createdAt": "2023-01-18T00:13:58.444Z",
+		"updatedAt": "2023-01-18T00:13:58.444Z",
+		"isActive": true
+	},
+	{
+		"id": "b096be51-caca-47ae-9e54-2445f0a4afe8",
+		"name": "Campeonato de Teste 2",
+		"status": true,
+		"winner": null,
+		"number_players": 8,
+		"description": "Aqui vem a descrição!",
+		"createdAt": "2023-01-18T00:14:13.194Z",
+		"updatedAt": "2023-01-18T00:14:13.194Z",
+		"isActive": true
+	},
+	{
+		"id": "7886c810-38db-44f0-8ac1-d0c95ca65342",
+		"name": "Campeonato de Teste 2",
+		"status": true,
+		"winner": null,
+		"number_players": 8,
+		"description": "Aqui vem a descrição!",
+		"createdAt": "2023-01-18T00:16:55.732Z",
+		"updatedAt": "2023-01-18T00:16:55.732Z",
+		"isActive": true
+	},
+	{
+		"id": "d3a8aa3c-ea8f-4a03-af78-b45c243303a0",
+		"name": "Campeonato de Teste 2",
+		"status": true,
+		"winner": null,
+		"number_players": 8,
+		"description": "Aqui vem a descrição!",
+		"createdAt": "2023-01-18T00:17:03.506Z",
+		"updatedAt": "2023-01-18T00:17:03.506Z",
+		"isActive": true
+	}
+]
+```
