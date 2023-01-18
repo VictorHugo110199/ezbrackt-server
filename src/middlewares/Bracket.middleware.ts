@@ -32,8 +32,10 @@ export class BracketMiddleware {
       }
     });
 
-    if (winner !== bracket?.player1.id && bracket?.player2.id !== bracket?.player1.id && winner) {
-      throw new NotFoundError("Player Não encontrado!");
+    if (winner !== bracket?.player1.id && winner !== bracket?.player2?.id) {
+      if (winner) {
+        throw new NotFoundError("Player Não encontrado!");
+      }
     }
 
     next();
