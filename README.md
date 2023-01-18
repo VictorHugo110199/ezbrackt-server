@@ -783,3 +783,106 @@ Exemplo de response caso o campeonato não tenha sido criado pelo usuário logad
 	"message": "Campeonato inválido."
 }
 ```
+
+#
+
+### Rotas de player
+
+#
+
+### 1) Adicionar um player ao campeonato - POST /competitions/:id/players
+Essa rota só pode ser acessada por usuários autenticados (token).
+
+Essa rota receberá uma foto em formato de arquivo jpg, jpeg ou png, armazenando a mesma em um banco de dados e convertendo o arquivo para uma URL.
+
+É necessário acrescentar as seguintes configurações no *headers* da requisição:
+
+```javascript
+Content-Type: "application/json",
+image: "multipart/form-data"
+```
+
+<br>
+
+**Observações:** 
+
+- Ao adicionar o player, o campo de foto é opcional. Caso o usuário opte por não enviar, o valor retornado será null.
+
+``
+Exemplo de body
+``
+
+```
+    name: Player
+```
+
+``
+Exemplo de response - status 201
+`` 
+
+```javascript
+{
+	"name": "Player",
+	"photo": null,
+	"id": "1a54933a-47e7-426d-9c9f-138e8f6c675e",
+	"competition": {
+		"id": "31cde0cb-e276-42e0-b7ca-44e519df0109",
+		"name": "Campeonato de Teste 2",
+		"status": true,
+		"winner": null,
+		"number_players": 8,
+		"description": "Aqui vem a descrição!",
+		"createdAt": "2023-01-18T04:29:16.504Z",
+		"updatedAt": "2023-01-18T04:29:16.504Z",
+		"isActive": true
+	}
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o usuário não esteja autenticado - status 401
+`` 
+
+```javascript
+{
+	"message": "Token inválido"
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o campeonato não seja encontrado ou não exista - status 404
+`` 
+
+```javascript
+{
+	"message": "Competição não encontrada."
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o campeonato não tenha sido criado pelo usuário logado - status 401
+`` 
+
+```javascript
+{
+	"message": "Campeonato inválido."
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o campeonato já tenha atingido o número máximo de usuários - status 409
+`` 
+
+```javascript
+{
+	"message": "Esse campeonato já atingiu o número máximo de players"
+}
+```
