@@ -1,12 +1,19 @@
 <h1 align="center">Documentação da API - ezBracket 🏆</h1>
 
+<h3 align="center">Plataforma de gerenciamento de torneios entre amigos de forma rápida e gratuita!</h3>
+
 <br/>
+
+## 📝 Sumário
+
+
+<br>
 
 ## ✅ Links da aplicação
 - URL de teste: http://localhost:3333
 - URL de produção: https://ezbracket2.onrender.com
 
-<br/>
+<br>
 
 ## 🦾 **Tecnologias utilizadas**
 - **TypeScript**
