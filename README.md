@@ -723,7 +723,7 @@ Exemplo de response caso o campeonato não seja encontrado ou não exista - stat
 <br>
 
 ``
-Exemplo de response caso o campeonato não tenha sido criado pelo usuário logado - status 404
+Exemplo de response caso o campeonato não tenha sido criado pelo usuário logado - status 401
 `` 
 
 ```javascript
