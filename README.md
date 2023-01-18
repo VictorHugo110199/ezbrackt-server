@@ -1149,3 +1149,85 @@ Exemplo de response caso o campeonato não tenha sido criado pelo usuário logad
 	"message": "Campeonato inválido."
 }
 ```
+
+#
+
+### 2) Definir o vencedor de um chaveamento - POST /brackets/winner/:idBracket
+Essa rota só pode ser acessada por usuários autenticados (token).
+
+``
+Exemplo de body
+``
+
+```javascript
+{
+	"winner": "1ad7b1f1-f431-4182-ab0b-ee00a883276a"
+}
+```
+
+``
+Exemplo de response - status 201
+``
+
+```javascript
+{
+	"id": "e8634a7d-e3e8-4435-98d1-8187257ade8b",
+	"currentRound": 2,
+	"status": true,
+	"player1": {
+		"id": "1ad7b1f1-f431-4182-ab0b-ee00a883276a",
+		"name": "Victor",
+		"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979085/fy8ca8ckjka9ro9iv2fk.jpg"
+	},
+	"player2": {
+		"id": "9c464d5b-6d68-4d92-8ccb-a7b3a36bae2e",
+		"name": "Gustavo",
+		"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979087/vtlgaurg5abnfwf8odaq.jpg"
+	},
+	"winner": {
+		"id": "1ad7b1f1-f431-4182-ab0b-ee00a883276a",
+		"name": "Victor",
+		"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979085/fy8ca8ckjka9ro9iv2fk.jpg"
+	},
+	"loser": {
+		"id": "9c464d5b-6d68-4d92-8ccb-a7b3a36bae2e",
+		"name": "Gustavo",
+		"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979087/vtlgaurg5abnfwf8odaq.jpg"
+	},
+	"competition": {
+		"id": "a3896bed-7b24-401c-95bf-669898b2059c",
+		"name": "Campeonato de Teste",
+		"status": true,
+		"winner": null,
+		"number_players": 4,
+		"description": "Aqui vem a descrição!",
+		"createdAt": "2023-01-17T18:11:22.909Z",
+		"updatedAt": "2023-01-17T18:11:22.909Z",
+		"isActive": true
+	}
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o usuário não esteja autenticado - status 401
+`` 
+
+```javascript
+{
+	"message": "Token inválido"
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o chaveamento não seja encontrado ou não exista - status 404
+`` 
+
+```javascript
+{
+	"message": "Chaveamento não encontrado."
+}
+```
