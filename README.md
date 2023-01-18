@@ -719,3 +719,15 @@ Exemplo de response caso o campeonato não seja encontrado ou não exista - stat
 	"message": "Competição não encontrada."
 }
 ```
+
+<br>
+
+``
+Exemplo de response caso o campeonato não tenha sido criado pelo usuário logado - status 404
+`` 
+
+```javascript
+{
+	"message": "Campeonato inválido."
+}
+```
