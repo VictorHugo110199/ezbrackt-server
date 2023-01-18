@@ -964,3 +964,63 @@ Exemplo de response caso o campeonato não seja encontrado ou não exista - stat
 	"message": "Competição não encontrada."
 }
 ```
+
+#
+
+### 3) Editar um player - PATCH /players/:id
+Essa rota só pode ser acessada por usuários autenticados (token).
+
+Essa rota receberá uma foto em formato de arquivo jpg, jpeg ou png, armazenando a mesma em um banco de dados e convertendo o arquivo para uma URL.
+
+É necessário acrescentar as seguintes configurações no *headers* da requisição:
+
+```javascript
+Content-Type: "application/json",
+image: "multipart/form-data"
+```
+
+<br>
+
+``
+Exemplo de body
+``
+
+```
+    name: Gustavo
+```
+
+``
+Exemplo de response - status 200
+`` 
+
+```javascript
+{
+	"id": "a1d12cc0-ba5a-4841-8378-55387e5315e7",
+	"name": "Gustavo",
+	"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979117/koea44w0oj1h8jrottyo.jpg"
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o usuário não esteja autenticado - status 401
+`` 
+
+```javascript
+{
+	"message": "Token inválido"
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o player não seja encontrado ou não exista - status 404
+`` 
+
+```javascript
+{
+	"message": "Jogador não encontrado."
+}
+```
