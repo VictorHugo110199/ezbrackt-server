@@ -1423,7 +1423,11 @@ Exemplo de response caso o chaveamento inicial ainda não tenha sido criado - st
             </div>
         </sub>
     </td>   
-      <td align="center">
+  </tr>
+</table>
+<table align="center">
+  <tr>
+  <td align="center">
         <img src="https://media.licdn.com/dms/image/C5603AQEuHFmQVdW6dA/profile-displayphoto-shrink_800_800/0/1653584673425?e=1679529600&v=beta&t=pQNg-wQuNhfovUPGwH7WlADUp1BQls_l9kArPtw_QDQ" width="100px;" alt="Foto do Ayrton"/><br>          
         <sub>
           <b>Ayrton Hideo</b>  <br/>
@@ -1436,10 +1440,6 @@ Exemplo de response caso o chaveamento inicial ainda não tenha sido criado - st
              </div>
         </sub>
     </td> 
-  </tr>
-</table>
-<table align="center">
-  <tr>
     <td align="center">
         <img src="https://avatars.githubusercontent.com/u/106822915?v=4" width="100px;" alt="Foto do Enrico"/><br>          
         <sub>
