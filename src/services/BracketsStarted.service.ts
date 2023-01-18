@@ -28,7 +28,7 @@ export class BracketsStartedService {
             competition: { id: idCompetition },
             player1: { ...playerSort[i] },
             player2: { ...playerSort[i + 1] },
-            currentRound: playerSort.length / 2
+            currentRound: Math.round(playerSort.length / 2)
           });
           await bracketRepository.save(bracket);
         }
@@ -149,7 +149,7 @@ export class BracketsStartedService {
             competition: { id: idCompetition },
             player1: { ...playersWinner[i] },
             player2: { ...playersWinner[i + 1] },
-            currentRound: playersWinner.length / 2
+            currentRound: Math.round(playersWinner.length / 2)
           });
 
           await bracketRepository.save(bracket);
