@@ -784,6 +784,8 @@ Exemplo de response caso o campeonato não tenha sido criado pelo usuário logad
 }
 ```
 
+<br>
+
 #
 
 ### Rotas de player
@@ -1022,5 +1024,128 @@ Exemplo de response caso o player não seja encontrado ou não exista - status 4
 ```javascript
 {
 	"message": "Jogador não encontrado."
+}
+```
+
+<br>
+
+#
+
+### Rotas de chaveamento (Brackets)
+
+#
+
+### 1) Iniciar o chaveamento de uma competição - POST /brackets/:idCampeonato
+Essa rota só pode ser acessada por usuários autenticados (token).
+
+``
+Exemplo de response - status 201
+``
+
+```javascript
+{
+	"id": "a3896bed-7b24-401c-95bf-669898b2059c",
+	"name": "Campeonato de Teste",
+	"status": true,
+	"winner": null,
+	"number_players": 4,
+	"description": "Aqui vem a descrição!",
+	"createdAt": "2023-01-17T18:11:22.909Z",
+	"updatedAt": "2023-01-17T18:11:22.909Z",
+	"isActive": true,
+	"players": [
+		{
+			"id": "1ad7b1f1-f431-4182-ab0b-ee00a883276a",
+			"name": "Gustavo",
+			"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979085/fy8ca8ckjka9ro9iv2fk.jpg"
+		},
+		{
+			"id": "9c464d5b-6d68-4d92-8ccb-a7b3a36bae2e",
+			"name": "Enrico",
+			"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979087/vtlgaurg5abnfwf8odaq.jpg"
+		},
+		{
+			"id": "b6e6c5c4-ec76-4d74-9e45-1ffb5a5bfd06",
+			"name": "Fred",
+			"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979087/vvvwbzdhugwhzkke97i6.jpg"
+		},
+		{
+			"id": "a1d12cc0-ba5a-4841-8378-55387e5315e7",
+			"name": "Ayrton",
+			"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979117/koea44w0oj1h8jrottyo.jpg"
+		}
+	],
+	"bracket": [
+		{
+			"id": "e8634a7d-e3e8-4435-98d1-8187257ade8b",
+			"currentRound": 2,
+			"status": true,
+			"player1": {
+				"id": "1ad7b1f1-f431-4182-ab0b-ee00a883276a",
+				"name": "Gustavo",
+				"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979085/fy8ca8ckjka9ro9iv2fk.jpg"
+			},
+			"player2": {
+				"id": "9c464d5b-6d68-4d92-8ccb-a7b3a36bae2e",
+				"name": "Enrico",
+				"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979087/vtlgaurg5abnfwf8odaq.jpg"
+			},
+			"winner": null,
+			"loser": null
+		},
+		{
+			"id": "0477cab5-61a0-4840-8a4a-71fbc3c5d5b2",
+			"currentRound": 2,
+			"status": true,
+			"player1": {
+				"id": "b6e6c5c4-ec76-4d74-9e45-1ffb5a5bfd06",
+				"name": "Fred",
+				"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979087/vvvwbzdhugwhzkke97i6.jpg"
+			},
+			"player2": {
+				"id": "a1d12cc0-ba5a-4841-8378-55387e5315e7",
+				"name": "Ayrton",
+				"photo": "http://res.cloudinary.com/dx5jdvqp6/image/upload/v1673979117/koea44w0oj1h8jrottyo.jpg"
+			},
+			"winner": null,
+			"loser": null
+		}
+	]
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o usuário não esteja autenticado - status 401
+`` 
+
+```javascript
+{
+	"message": "Token inválido"
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o campeonato não seja encontrado ou não exista - status 404
+`` 
+
+```javascript
+{
+	"message": "Competição não encontrada."
+}
+```
+
+<br>
+
+``
+Exemplo de response caso o campeonato não tenha sido criado pelo usuário logado - status 401
+`` 
+
+```javascript
+{
+	"message": "Campeonato inválido."
 }
 ```
