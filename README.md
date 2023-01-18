@@ -6,6 +6,17 @@
 
 ## 📝 Sumário
 
+1) Links da aplicação
+2) Tecnologias utilizadas
+3) Sobre os testes
+	- Rodando os testes
+4) Rotas da aplicação
+	- Rotas do usuário
+	- Rota de login
+	- Rotas do campeonato
+	- Rotas do player
+	- Rotas do chaveamento
+
 
 <br>
 
